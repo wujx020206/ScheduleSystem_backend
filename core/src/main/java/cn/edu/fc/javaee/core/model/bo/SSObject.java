@@ -16,9 +16,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class OOMallObject implements Cloneable{
+public class SSObject implements Cloneable{
 
-    protected Long id;
+    protected String id;
     /**
      * 创建者id
      */

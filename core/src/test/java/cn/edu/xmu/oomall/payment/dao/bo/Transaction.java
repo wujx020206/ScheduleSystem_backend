@@ -2,7 +2,7 @@
 
 package cn.edu.xmu.oomall.payment.dao.bo;
 
-import cn.edu.fc.javaee.core.model.bo.OOMallObject;
+import cn.edu.fc.javaee.core.model.bo.SSObject;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class Transaction extends OOMallObject{
+public class Transaction extends SSObject {
 
     /**
      * 内部交易号

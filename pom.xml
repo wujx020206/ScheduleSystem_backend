@@ -32,6 +32,7 @@
     <modules>
         <module>core</module>
         <module>staff</module>
+        <module>shop</module>
     </modules>
 
     <dependencyManagement>

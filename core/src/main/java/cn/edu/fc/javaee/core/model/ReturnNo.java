@@ -20,7 +20,7 @@ public enum ReturnNo {
     RESOURCE_FALSIFY(11, "信息签名不正确"),
 
     //状态码 404
-    RESOURCE_ID_NOTEXIST(4,"%s对象(id=%d)不存在"),
+    RESOURCE_ID_NOTEXIST(4,"%s对象(id=%s)不存在"),
 
     //状态码 500
     INTERNAL_SERVER_ERR(2,"服务器内部错误"),
@@ -32,9 +32,6 @@ public enum ReturnNo {
     IMG_FORMAT_ERROR(8,"图片格式不正确"),
     IMG_SIZE_EXCEED(9,"图片大小超限"),
     PARAMETER_MISSED(10, "缺少必要参数"),
-    LATE_BEGINTIME(19, "开始时间不能晚于结束时间"),
-    ADV_SALE_TIMELATE(220, "尾款支付时间晚于活动结束时间"),
-    ADV_SALE_TIMEEARLY(221, "尾款支付时间早于活动开始时间"),
 
     //状态码 401
     AUTH_INVALID_JWT(5,"JWT不合法"),
@@ -50,12 +47,9 @@ public enum ReturnNo {
     FILE_NO_WRITE_PERMISSION(18,"目录文件夹没有写入的权限"),
 
     /**************************************
-     *  支付模块
+     *  员工模块
      ************************************/
-    PAY_CHANNEL_INVALID(102,"%s支付渠道无效"),
-    PAY_CHANNEL_EXIST(103,"商铺(id=%d)的支付渠道(id=%d)已经存在"),
-    PAY_REFUND_MORE(104,"退款金额超过支付对象(id=%d)的金额"),
-    PAY_DIVREFUND_MORE(105,"分账退回金额超过支付对象(id=%d)的支付分账金额"),
+    STAFF_EXIST(103,"员工(name=%s)已经存在"),
 
     /***************************************************
      *    商铺模块错误码

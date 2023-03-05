@@ -1,0 +1,31 @@
+package cn.edu.fc.mapper.po;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "staff_staff")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class StaffPo {
+    @Id
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    private String id;
+
+    private String name;
+
+    private String position;
+
+    private String phone;
+
+    private String email;
+
+    private String shopId;
+}

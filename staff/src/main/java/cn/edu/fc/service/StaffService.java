@@ -23,12 +23,12 @@ public class StaffService {
 
     private final StaffDao staffDao;
 
-    private final StoreDao shopDao;
+    private final StoreDao storeDao;
 
     @Autowired
-    public StaffService(StaffDao staffDao, StoreDao shopDao) {
+    public StaffService(StaffDao staffDao, StoreDao storeDao) {
         this.staffDao = staffDao;
-        this.shopDao = shopDao;
+        this.storeDao = storeDao;
     }
 
     public PageDto<StaffDto> retrieveStaffs(Integer page, Integer pageSize) {
@@ -56,7 +56,7 @@ public class StaffService {
     }
 
     public void createStaff(String name, String position, String phone, String email, String shopId, UserDto user) {
-        Store shop = this.shopDao.getShopById(shopId).getData();
+        Store shop = this.storeDao.getShopById(shopId).getData();
         if (null == shop) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), "商铺", shopId));
         }

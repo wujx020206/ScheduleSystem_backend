@@ -9,7 +9,7 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>cn.edu.fc.oomall</groupId>
+    <groupId>cn.edu.fc.schedulesystem</groupId>
     <artifactId>staff</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>staff</name>
@@ -135,7 +135,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>cn.edu.xmu.oomall.freights.FreightApplication</mainClass>
+                    <mainClass>cn.edu.fc.StaffApplication</mainClass>
                 </configuration>
             </plugin>
 

@@ -1,6 +1,6 @@
 package cn.edu.fc.dao.bo;
 
-import cn.edu.fc.dao.openfeign.ShopDao;
+import cn.edu.fc.dao.openfeign.StoreDao;
 import cn.edu.fc.javaee.core.model.bo.SSObject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -71,14 +71,14 @@ public class Staff extends SSObject implements Serializable {
     @Setter
     private String shopId;
 
-    private Shop shop;
+    private Store shop;
 
     @ToString.Exclude
     @JsonIgnore
     @Setter
-    private ShopDao shopDao;
+    private StoreDao shopDao;
 
-    public Shop getShop() {
+    public Store getShop() {
         if (null == this.shopId) {
             return null;
         }

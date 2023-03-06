@@ -1,7 +1,7 @@
 package cn.edu.fc.dao;
 
 import cn.edu.fc.dao.bo.Staff;
-import cn.edu.fc.dao.openfeign.ShopDao;
+import cn.edu.fc.dao.openfeign.StoreDao;
 import cn.edu.fc.javaee.core.exception.BusinessException;
 import cn.edu.fc.javaee.core.model.ReturnNo;
 import cn.edu.fc.javaee.core.model.dto.UserDto;
@@ -38,10 +38,10 @@ public class StaffDao {
 
     private RedisUtil redisUtil;
 
-    private ShopDao shopDao;
+    private StoreDao shopDao;
 
     @Autowired
-    public StaffDao(StaffPoMapper staffPoMapper, RedisUtil redisUtil, ShopDao shopDao) {
+    public StaffDao(StaffPoMapper staffPoMapper, RedisUtil redisUtil, StoreDao shopDao) {
         this.staffPoMapper = staffPoMapper;
         this.redisUtil = redisUtil;
         this.shopDao = shopDao;

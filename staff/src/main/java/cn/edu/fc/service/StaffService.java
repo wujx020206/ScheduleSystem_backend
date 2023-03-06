@@ -1,9 +1,9 @@
 package cn.edu.fc.service;
 
 import cn.edu.fc.dao.StaffDao;
-import cn.edu.fc.dao.bo.Shop;
+import cn.edu.fc.dao.bo.Store;
 import cn.edu.fc.dao.bo.Staff;
-import cn.edu.fc.dao.openfeign.ShopDao;
+import cn.edu.fc.dao.openfeign.StoreDao;
 import cn.edu.fc.javaee.core.exception.BusinessException;
 import cn.edu.fc.javaee.core.model.ReturnNo;
 import cn.edu.fc.javaee.core.model.dto.PageDto;
@@ -23,10 +23,10 @@ public class StaffService {
 
     private final StaffDao staffDao;
 
-    private final ShopDao shopDao;
+    private final StoreDao shopDao;
 
     @Autowired
-    public StaffService(StaffDao staffDao, ShopDao shopDao) {
+    public StaffService(StaffDao staffDao, StoreDao shopDao) {
         this.staffDao = staffDao;
         this.shopDao = shopDao;
     }
@@ -56,7 +56,7 @@ public class StaffService {
     }
 
     public void createStaff(String name, String position, String phone, String email, String shopId, UserDto user) {
-        Shop shop = this.shopDao.getShopById(shopId).getData();
+        Store shop = this.shopDao.getShopById(shopId).getData();
         if (null == shop) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), "商铺", shopId));
         }

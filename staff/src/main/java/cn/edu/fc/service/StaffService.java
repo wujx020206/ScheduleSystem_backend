@@ -1,6 +1,5 @@
 package cn.edu.fc.service;
 
-import cn.edu.fc.dao.PreferenceDao;
 import cn.edu.fc.dao.StaffDao;
 import cn.edu.fc.dao.bo.Shop;
 import cn.edu.fc.dao.bo.Staff;
@@ -22,16 +21,14 @@ import java.util.stream.Collectors;
 public class StaffService {
     private static final Logger logger = LoggerFactory.getLogger(StaffService.class);
 
-    private PreferenceDao preferenceDao;
+    private final StaffDao staffDao;
 
-    private StaffDao staffDao;
-
-    private ShopDao shopDao;
+    private final ShopDao shopDao;
 
     @Autowired
-    public StaffService(PreferenceDao preferenceDao, StaffDao staffDao) {
-        this.preferenceDao = preferenceDao;
+    public StaffService(StaffDao staffDao, ShopDao shopDao) {
         this.staffDao = staffDao;
+        this.shopDao = shopDao;
     }
 
     public PageDto<StaffDto> retrieveStaffs(Integer page, Integer pageSize) {

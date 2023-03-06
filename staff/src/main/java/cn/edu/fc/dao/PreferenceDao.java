@@ -7,6 +7,7 @@ import cn.edu.fc.javaee.core.model.dto.UserDto;
 import cn.edu.fc.javaee.core.util.RedisUtil;
 import cn.edu.fc.mapper.PreferencePoMapper;
 import cn.edu.fc.mapper.po.PreferencePo;
+import cn.edu.fc.mapper.po.StaffPo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,13 +108,16 @@ public class PreferenceDao {
         return getBo(preferencePo, Optional.empty());
     }
 
-    public void insert(Preference preference, UserDto user) throws RuntimeException {
+    public void insert(Preference preference) throws RuntimeException {
         PreferencePo po = this.preferencePoMapper.findByTypeAndStaffId(preference.getType(), preference.getStaffId());
 
         PreferencePo preferencePo = getPo(preference);
-        putUserFields(preferencePo, "creator", user);
-        putGmtFields(preferencePo, "create");
         this.preferencePoMapper.save(preferencePo);
+    }
+
+    public void save(Preference preference) {
+        PreferencePo po = getPo(preference);
+        this.preferencePoMapper.save(po);
     }
 
     public void delete(Byte type, String id) {

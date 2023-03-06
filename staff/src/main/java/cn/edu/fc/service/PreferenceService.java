@@ -76,17 +76,17 @@ public class PreferenceService {
         }
 
         Preference obj = Preference.builder().type(type).staffId(staffId).value(value).build();
-        this.preferenceDao.insert(obj, user);
+        this.preferenceDao.insert(obj);
     }
 
-    public void updatePreference(String staffId, Byte type, String value, UserDto user) {
+    public void updatePreference(String staffId, Byte type, String value) {
         Preference preference = this.preferenceDao.findByTypeAndStaffId(type, staffId);
         if (null == preference) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), "员工偏好", staffId));
         }
 
         preference.setValue(value);
-        this.preferenceDao.insert(preference, user);
+        this.preferenceDao.save(preference);
     }
 
     public void deletePreference(Byte type, String staffId) {

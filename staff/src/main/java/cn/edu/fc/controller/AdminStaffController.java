@@ -117,9 +117,8 @@ public class AdminStaffController {
     @PutMapping("/{staffId}/preferences/{preferenceId}/preference")
     public ReturnObject updateStaffPreference(@PathVariable String staffId,
                                               @PathVariable Byte type,
-                                              @Valid @RequestBody UpdatePreferenceVo vo,
-                                              @LoginUser UserDto user) {
-        this.preferenceService.updatePreference(staffId, type, vo.getValue(), user);
+                                              @Valid @RequestBody UpdatePreferenceVo vo) {
+        this.preferenceService.updatePreference(staffId, type, vo.getValue());
         return new ReturnObject(ReturnNo.OK);
     }
 

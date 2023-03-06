@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication(scanBasePackages = {"cn.edu.fc.javaee.core",
         "cn.edu.fc.schedulesystem.staff"})
-@MapperScan("cn.edu.xmu.schedulesystem.staff.mapper.generator")
+@MapperScan("cn.edu.xmu.schedulesystem.staff.mapper")
 @EnableFeignClients
 @EnableDiscoveryClient
 public class StaffApplication {

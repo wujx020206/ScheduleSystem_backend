@@ -40,8 +40,8 @@ public class StaffService {
         return new PageDto<>(ret, page, pageSize);
     }
 
-    public PageDto<StaffDto> retrieveStaffsByShopId(String shopId, Integer page, Integer pageSize) {
-        List<Staff> staffs = this.staffDao.retrieveByShopId(shopId, page, pageSize);
+    public PageDto<StaffDto> retrieveStaffsByStoreId(String storeId, Integer page, Integer pageSize) {
+        List<Staff> staffs = this.staffDao.retrieveByShopId(storeId, page, pageSize);
         List<StaffDto> ret = staffs.stream().map(obj -> {
             StaffDto dto = StaffDto.builder().name(obj.getName()).position(obj.getPosition()).phone(obj.getPhone()).email(obj.getEmail()).shopName(obj.getShop().getName()).build();
             return dto;
@@ -56,7 +56,7 @@ public class StaffService {
     }
 
     public void createStaff(String name, String position, String phone, String email, String shopId, UserDto user) {
-        Store shop = this.storeDao.getShopById(shopId).getData();
+        Store shop = this.storeDao.getStoreById(shopId).getData();
         if (null == shop) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), "商铺", shopId));
         }

@@ -42,10 +42,10 @@ public class AdminStaffController {
     }
 
     @GetMapping("/{shopId}/staffs")
-    public ReturnObject getShopStaffs(@PathVariable String shopId,
+    public ReturnObject getShopStaffs(@PathVariable String storeId,
                                       @RequestParam(required = false, defaultValue = "1") Integer page,
                                       @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
-        PageDto<StaffDto> ret = this.staffService.retrieveStaffsByShopId(shopId, page, pageSize);
+        PageDto<StaffDto> ret = this.staffService.retrieveStaffsByStoreId(storeId, page, pageSize);
         return new ReturnObject(ReturnNo.OK, ret);
     }
 

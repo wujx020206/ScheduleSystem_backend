@@ -71,23 +71,23 @@ public class Staff extends SSObject implements Serializable {
     @Setter
     private String shopId;
 
-    private Store shop;
+    private Store store;
 
     @ToString.Exclude
     @JsonIgnore
     @Setter
-    private StoreDao shopDao;
+    private StoreDao storeDao;
 
     public Store getShop() {
         if (null == this.shopId) {
             return null;
         }
 
-        if (null == this.shop && null != this.shopDao) {
-            this.shop = this.shopDao.getShopById(this.shopId).getData();
+        if (null == this.store && null != this.storeDao) {
+            this.store = this.storeDao.getStoreById(this.shopId).getData();
         }
 
-        return this.shop;
+        return this.store;
     }
 
     @Builder

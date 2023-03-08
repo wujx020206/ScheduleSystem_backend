@@ -38,13 +38,13 @@ public class StaffDao {
 
     private RedisUtil redisUtil;
 
-    private StoreDao shopDao;
+    private StoreDao storeDao;
 
     @Autowired
-    public StaffDao(StaffPoMapper staffPoMapper, RedisUtil redisUtil, StoreDao shopDao) {
+    public StaffDao(StaffPoMapper staffPoMapper, RedisUtil redisUtil, StoreDao storeDao) {
         this.staffPoMapper = staffPoMapper;
         this.redisUtil = redisUtil;
-        this.shopDao = shopDao;
+        this.storeDao = storeDao;
     }
 
     private Staff getBo(StaffPo po, Optional<String> redisKey) {
@@ -56,7 +56,7 @@ public class StaffDao {
     }
 
     private void setBo(Staff bo) {
-        bo.setShopDao(shopDao);
+        bo.setStoreDao(storeDao);
     }
 
     private StaffPo getPo(Staff bo) {

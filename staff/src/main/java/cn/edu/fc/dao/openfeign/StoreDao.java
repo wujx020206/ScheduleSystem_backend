@@ -6,8 +6,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient("shop-service")
+@FeignClient("store-service")
 public interface StoreDao {
-    @GetMapping("/shops/{id}")
-    InternalReturnObject<Store> getShopById(@PathVariable String id);
+    @GetMapping("/stores/{id}")
+    InternalReturnObject<Store> getStoreById(@PathVariable String id);
 }

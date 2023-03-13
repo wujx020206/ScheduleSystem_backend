@@ -27,7 +27,7 @@ public class AdminDataController {
         this.dataService = dataService;
     }
 
-    @GetMapping("/data")
+    @GetMapping("/{storeId}/data")
     public ReturnObject getDataByStoreId(@PathVariable String storeId,
                                          @RequestParam(required = false, defaultValue = "1") Integer page,
                                          @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
@@ -35,7 +35,7 @@ public class AdminDataController {
         return new ReturnObject(ReturnNo.OK, ret);
     }
 
-    @GetMapping("/period")
+    @GetMapping("/{storeId}/period")
     public ReturnObject getDataByPeriod(@PathVariable String storeId,
                                         @Validated @RequestBody DateVo dateVo,
                                         @RequestParam(required = false, defaultValue = "1") Integer page,
@@ -44,7 +44,7 @@ public class AdminDataController {
         return new ReturnObject(ReturnNo.OK, ret);
     }
 
-    @GetMapping("/{date}/day")
+    @GetMapping("/{storeId}/{date}/day")
     public ReturnObject getDataByDay(@PathVariable String storeId,
                                      @PathVariable LocalDate date,
                                      @RequestParam(required = false, defaultValue = "1") Integer page,
@@ -53,7 +53,7 @@ public class AdminDataController {
         return new ReturnObject(ReturnNo.OK, ret);
     }
 
-    @GetMapping("/{date}/{time}/day")
+    @GetMapping("/{storeId}/{date}/{time}/day")
     public ReturnObject getDataByDayAndTime(@PathVariable String storeId,
                                             @PathVariable LocalDate date,
                                             @Validated @RequestBody TimeVo timeVo) {

@@ -49,7 +49,7 @@ public class StaffDao {
 
     private Staff getBo(StaffPo po, Optional<String> redisKey) {
         Staff bo = Staff.builder().name(po.getName()).position(po.getPosition()).phone(po.getPhone())
-                .email(po.getEmail()).shopId(po.getShopId()).build();
+                .email(po.getEmail()).storeId(po.getShopId()).build();
         this.setBo(bo);
         redisKey.ifPresent(key -> redisUtil.set(key, bo, timeout));
         return bo;
@@ -60,7 +60,7 @@ public class StaffDao {
     }
 
     private StaffPo getPo(Staff bo) {
-        StaffPo po = StaffPo.builder().id(bo.getId()).name(bo.getName()).position(bo.getPosition()).phone(bo.getPhone()).email(bo.getEmail()).shopId(bo.getShopId()).build();
+        StaffPo po = StaffPo.builder().id(bo.getId()).name(bo.getName()).position(bo.getPosition()).phone(bo.getPhone()).email(bo.getEmail()).shopId(bo.getStoreId()).build();
         return po;
     }
 

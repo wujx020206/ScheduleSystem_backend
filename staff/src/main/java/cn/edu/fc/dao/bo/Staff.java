@@ -69,7 +69,7 @@ public class Staff extends SSObject implements Serializable {
 
     @Getter
     @Setter
-    private String shopId;
+    private String storeId;
 
     private Store store;
 
@@ -78,13 +78,13 @@ public class Staff extends SSObject implements Serializable {
     @Setter
     private StoreDao storeDao;
 
-    public Store getShop() {
-        if (null == this.shopId) {
+    public Store getStore() {
+        if (null == this.storeId) {
             return null;
         }
 
         if (null == this.store && null != this.storeDao) {
-            this.store = this.storeDao.getStoreById(this.shopId).getData();
+            this.store = this.storeDao.getStoreById(this.storeId).getData();
         }
 
         return this.store;
@@ -92,12 +92,12 @@ public class Staff extends SSObject implements Serializable {
 
     @Builder
     public Staff(String id, Long creatorId, Long modifierId, String modifierName, String creatorName, LocalDateTime gmtCreate, LocalDateTime gmtModified,
-                 String name, String position, String phone, String email, String shopId) {
+                 String name, String position, String phone, String email, String storeId) {
         super(id, creatorId, creatorName, modifierId, modifierName, gmtCreate, gmtModified);
         this.name = name;
         this.position = position;
         this.phone = phone;
         this.email = email;
-        this.shopId = shopId;
+        this.storeId = storeId;
     }
 }

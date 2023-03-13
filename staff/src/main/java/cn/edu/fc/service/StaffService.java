@@ -34,7 +34,7 @@ public class StaffService {
     public PageDto<StaffDto> retrieveStaffs(Integer page, Integer pageSize) {
         List<Staff> staffs = this.staffDao.retrieveAll(page, pageSize);
         List<StaffDto> ret = staffs.stream().map(obj -> {
-            StaffDto dto = StaffDto.builder().name(obj.getName()).position(obj.getPosition()).phone(obj.getPhone()).email(obj.getEmail()).shopName(obj.getShop().getName()).build();
+            StaffDto dto = StaffDto.builder().name(obj.getName()).position(obj.getPosition()).phone(obj.getPhone()).email(obj.getEmail()).shopName(obj.getStore().getName()).build();
             return dto;
         }).collect(Collectors.toList());
         return new PageDto<>(ret, page, pageSize);
@@ -43,7 +43,7 @@ public class StaffService {
     public PageDto<StaffDto> retrieveStaffsByStoreId(String storeId, Integer page, Integer pageSize) {
         List<Staff> staffs = this.staffDao.retrieveByShopId(storeId, page, pageSize);
         List<StaffDto> ret = staffs.stream().map(obj -> {
-            StaffDto dto = StaffDto.builder().name(obj.getName()).position(obj.getPosition()).phone(obj.getPhone()).email(obj.getEmail()).shopName(obj.getShop().getName()).build();
+            StaffDto dto = StaffDto.builder().name(obj.getName()).position(obj.getPosition()).phone(obj.getPhone()).email(obj.getEmail()).shopName(obj.getStore().getName()).build();
             return dto;
         }).collect(Collectors.toList());
         return new PageDto<>(ret, page, pageSize);
@@ -51,7 +51,7 @@ public class StaffService {
 
     public StaffDto findStaffById(String staffId) {
         Staff obj = this.staffDao.findById(staffId);
-        StaffDto dto = StaffDto.builder().name(obj.getName()).position(obj.getPosition()).phone(obj.getPhone()).email(obj.getEmail()).shopName(obj.getShop().getName()).build();
+        StaffDto dto = StaffDto.builder().name(obj.getName()).position(obj.getPosition()).phone(obj.getPhone()).email(obj.getEmail()).shopName(obj.getStore().getName()).build();
         return dto;
     }
 
@@ -61,7 +61,7 @@ public class StaffService {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), "商铺", shopId));
         }
 
-        Staff staff = Staff.builder().name(name).position(position).phone(phone).email(email).shopId(shopId).build();
+        Staff staff = Staff.builder().name(name).position(position).phone(phone).email(email).storeId(shopId).build();
         this.staffDao.insert(staff, user);
     }
 
@@ -75,7 +75,7 @@ public class StaffService {
         staff.setPosition(position);
         staff.setPhone(phone);
         staff.setEmail(email);
-        staff.setShopId(shopId);
+        staff.setStoreId(shopId);
         this.staffDao.save(staffId, staff, user);
     }
 

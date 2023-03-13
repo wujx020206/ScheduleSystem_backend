@@ -4,6 +4,7 @@ import cn.edu.fc.dao.bo.Rule;
 import cn.edu.fc.dao.openfeign.StoreDao;
 import cn.edu.fc.javaee.core.exception.BusinessException;
 import cn.edu.fc.javaee.core.model.ReturnNo;
+import cn.edu.fc.javaee.core.model.dto.UserDto;
 import cn.edu.fc.javaee.core.util.RedisUtil;
 import cn.edu.fc.mapper.RulePoMapper;
 import cn.edu.fc.mapper.po.RulePo;
@@ -17,6 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static cn.edu.fc.javaee.core.util.Common.putGmtFields;
+import static cn.edu.fc.javaee.core.util.Common.putUserFields;
 
 public class RuleDao {
     private final static Logger logger = LoggerFactory.getLogger(RuleDao.class);
@@ -98,5 +102,38 @@ public class RuleDao {
             return getBo(po,Optional.ofNullable(null));
         }).collect(Collectors.toList());
         return ret;
+    }
+
+    public Rule findByTypeAndStoreId(String type, String storeId) {
+        RulePo po = this.rulePoMapper.findByTypeAndStoreId(type, storeId);
+        if (null == po) {
+            return null;
+        }
+
+        return getBo(po, Optional.empty());
+    }
+
+    public String insert(Rule rule, UserDto user) throws RuntimeException {
+        RulePo po = this.rulePoMapper.findByTypeAndStoreId(rule.getType(), rule.getStoreId());
+        if (null == po) {
+            RulePo rulePo = getPo(rule);
+            putUserFields(rulePo, "creator", user);
+            putGmtFields(rulePo, "create");
+            this.rulePoMapper.save(rulePo);
+            return rulePo.getId();
+        } else {
+            throw new BusinessException(ReturnNo.RULE_EXIST, String.format(ReturnNo.RULE_EXIST.getMessage(), rule.getId()));
+        }
+    }
+
+    public String save(String ruleId, Rule rule, UserDto user) {
+        RulePo po = getPo(rule);
+        po.setId(ruleId);
+        if (null != user) {
+            putUserFields(po, "modifier", user);
+            putGmtFields(po, "modified");
+        }
+        this.rulePoMapper.save(po);
+        return String.format(KEY, rule.getId());
     }
 }

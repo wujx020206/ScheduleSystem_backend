@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RulePoMapper extends JpaRepository<RulePo, String> {
     Page<RulePo> findByStoreId(String storeId, Pageable pageable);
+
+    RulePo findByTypeAndStoreId(String type, String storeId);
 }

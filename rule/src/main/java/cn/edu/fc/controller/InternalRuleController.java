@@ -36,4 +36,11 @@ public class InternalRuleController {
         PageDto<RuleDto> ret = this.ruleService.retrieveRulesByStoreId(storeId, page, pageSize);
         return new ReturnObject(ReturnNo.OK, ret);
     }
+
+    @GetMapping("/{storeId}/{type}/rule")
+    public ReturnObject getStoreRuleByType(@PathVariable String storeId,
+                                           @PathVariable String type) {
+        RuleDto ret = this.ruleService.findByStoreIdAndType(storeId, type);
+        return new ReturnObject(ReturnNo.OK, ret);
+    }
 }

@@ -11,14 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/rule", produces = "application/json;charset=UTF-8")
-public class AdminRuleController {
-    private final Logger logger = LoggerFactory.getLogger(AdminRuleController.class);
+@RequestMapping(value = "/internal", produces = "application/json;charset=UTF-8")
+public class InternalRuleController {
+    private final Logger logger = LoggerFactory.getLogger(InternalRuleController.class);
 
     private final RuleService ruleService;
 
     @Autowired
-    public AdminRuleController(RuleService ruleService) {
+    public InternalRuleController(RuleService ruleService) {
         this.ruleService = ruleService;
     }
 

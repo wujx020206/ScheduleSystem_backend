@@ -11,8 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class RuleDao {
     private final static Logger logger = LoggerFactory.getLogger(RuleDao.class);
@@ -70,5 +74,29 @@ public class RuleDao {
         } else {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), "员工偏好", id));
         }
+    }
+
+    public List<Rule> retrieveAll(Integer page, Integer pageSize) throws RuntimeException {
+        List<RulePo> retList = this.rulePoMapper.findAll(PageRequest.of(page, pageSize))
+                .stream().collect(Collectors.toList());
+        if (null == retList || retList.size() == 0)
+            return new ArrayList<>();
+
+        List<Rule> ret = retList.stream().map(po->{
+            return getBo(po,Optional.ofNullable(null));
+        }).collect(Collectors.toList());
+        return ret;
+    }
+
+    public List<Rule> retrieveByStoreId(String storeId, Integer page, Integer pageSize) throws RuntimeException {
+        List<RulePo> retList = this.rulePoMapper.findByStoreId(storeId, PageRequest.of(page, pageSize))
+                .stream().collect(Collectors.toList());
+        if (null == retList || retList.size() == 0)
+            return new ArrayList<>();
+
+        List<Rule> ret = retList.stream().map(po->{
+            return getBo(po,Optional.ofNullable(null));
+        }).collect(Collectors.toList());
+        return ret;
     }
 }

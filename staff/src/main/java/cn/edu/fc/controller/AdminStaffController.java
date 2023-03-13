@@ -24,9 +24,9 @@ import javax.validation.Valid;
 public class AdminStaffController {
     private final Logger logger = LoggerFactory.getLogger(AdminStaffController.class);
 
-    private StaffService staffService;
+    private final StaffService staffService;
 
-    private PreferenceService preferenceService;
+    private final PreferenceService preferenceService;
 
     @Autowired
     public AdminStaffController(PreferenceService preferenceService, StaffService staffService) {

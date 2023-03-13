@@ -98,7 +98,7 @@ public class StaffDao {
     }
 
     public List<Staff> retrieveByShopId(String shopId, Integer page, Integer pageSize) {
-        List<StaffPo> retList = this.staffPoMapper.findByShopId(shopId, PageRequest.of(page, pageSize))
+        List<StaffPo> retList = this.staffPoMapper.findByStoreId(shopId, PageRequest.of(page, pageSize))
                 .stream().collect(Collectors.toList());
         if (null == retList || retList.size() == 0)
             return new ArrayList<>();

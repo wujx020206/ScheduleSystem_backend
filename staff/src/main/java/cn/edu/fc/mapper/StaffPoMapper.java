@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StaffPoMapper extends JpaRepository<StaffPo, String> {
-    Page<StaffPo> findByShopId(String shopId, Pageable pageable);
+    Page<StaffPo> findByStoreId(String storeId, Pageable pageable);
 
     StaffPo findByNameAndPhone(String name, String phone);
 }

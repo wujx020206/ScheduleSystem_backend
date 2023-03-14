@@ -111,7 +111,7 @@ public class Rule extends SSObject implements Serializable {
      * value：x
      * 晚餐x点开始
      */
-    public static final String DINNER_HOUR = "固定规则_晚餐开始时间";
+    public static final String DINNER_BEGIN = "固定规则_晚餐开始时间";
 
     /**
      * 固定规则_晚餐结束时间
@@ -183,6 +183,7 @@ public class Rule extends SSObject implements Serializable {
      * value：x 缺省值为2
      * 每天关店之后需要x小时做收尾工作
      */
+    // Todo
     public static final String END_HOUR = "自定义规则_无客流量店员数";
 
     /**
@@ -191,6 +192,7 @@ public class Rule extends SSObject implements Serializable {
      * value：”x y“ x缺省值为80，y缺省值为1
      * 收尾工作人数=y+门店面积/x
      */
+    // Todo
     public static final String END_PEOPLE = "自定义规则_无客流量店员数";
 
     /**

@@ -22,13 +22,6 @@ public class InternalRuleController {
         this.ruleService = ruleService;
     }
 
-    @GetMapping("/rules")
-    public ReturnObject getRules(@RequestParam(required = false, defaultValue = "1") Integer page,
-                                 @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
-        PageDto<RuleDto> ret = this.ruleService.retrieveRules(page, pageSize);
-        return new ReturnObject(ReturnNo.OK, ret);
-    }
-
     @GetMapping("/{storeId}/rules")
     public ReturnObject getStoreRules(@PathVariable String storeId,
                                       @RequestParam(required = false, defaultValue = "1") Integer page,

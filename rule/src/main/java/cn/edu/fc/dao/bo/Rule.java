@@ -183,8 +183,7 @@ public class Rule extends SSObject implements Serializable {
      * value：x 缺省值为2
      * 每天关店之后需要x小时做收尾工作
      */
-    // Todo
-    public static final String END_HOUR = "自定义规则_无客流量店员数";
+    public static final String END_HOUR = "自定义规则_收尾工作时长";
 
     /**
      * 自定义规则_收尾工作人数
@@ -192,8 +191,7 @@ public class Rule extends SSObject implements Serializable {
      * value：”x y“ x缺省值为80，y缺省值为1
      * 收尾工作人数=y+门店面积/x
      */
-    // Todo
-    public static final String END_PEOPLE = "自定义规则_无客流量店员数";
+    public static final String END_PEOPLE = "自定义规则_收尾工作人数";
 
     /**
      * 自定义规则_收尾工作职位

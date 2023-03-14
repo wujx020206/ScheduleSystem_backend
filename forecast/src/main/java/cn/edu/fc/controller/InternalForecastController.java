@@ -16,23 +16,15 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 
 @RestController
-@RequestMapping(value = "/forecast/{storeId}", produces = "application/json;charset=UTF-8")
-public class AdminDataController {
-    private final Logger logger = LoggerFactory.getLogger(AdminDataController.class);
+@RequestMapping(value = "/internal", produces = "application/json;charset=UTF-8")
+public class InternalForecastController {
+    private final Logger logger = LoggerFactory.getLogger(InternalForecastController.class);
 
     private final DataService dataService;
 
     @Autowired
-    public AdminDataController(DataService dataService) {
+    public InternalForecastController(DataService dataService) {
         this.dataService = dataService;
-    }
-
-    @GetMapping("/{storeId}/data")
-    public ReturnObject getDataByStoreId(@PathVariable String storeId,
-                                         @RequestParam(required = false, defaultValue = "1") Integer page,
-                                         @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
-        PageDto<DataDto> ret = this.dataService.retrieveDataByStoreId(storeId, page, pageSize);
-        return new ReturnObject(ReturnNo.OK, ret);
     }
 
     @GetMapping("/{storeId}/period")

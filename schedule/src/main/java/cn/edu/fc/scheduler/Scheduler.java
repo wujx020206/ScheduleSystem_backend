@@ -1,2 +1,4 @@
-package cn.edu.fc.scheduler;public class Scheduler {
+package cn.edu.fc.scheduler;
+
+public class Scheduler {
 }

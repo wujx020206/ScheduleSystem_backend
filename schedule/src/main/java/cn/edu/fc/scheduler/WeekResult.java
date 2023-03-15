@@ -1,2 +1,4 @@
-package cn.edu.fc.scheduler;public class ScheduleResult {
+package cn.edu.fc.scheduler;
+
+public class WeekResult {
 }

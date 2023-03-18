@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /**
- * OOMall的通用对象
+ * ScheduleSystem的通用对象
  */
 @Data
 @NoArgsConstructor

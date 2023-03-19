@@ -87,7 +87,7 @@ public class Rule extends SSObject implements Serializable {
      * value：x
      * 员工最长连续x小时
      */
-    public static final String MAXWORKWEEK = "固定规则_员工最长连续工作时长";
+    public static final String MAX_CONTINUOUS_WORK_TIME = "固定规则_员工最长连续工作时长";
 
     /**
      * 固定规则_午餐开始时间
@@ -183,7 +183,7 @@ public class Rule extends SSObject implements Serializable {
      * value：x 缺省值为2
      * 每天关店之后需要x小时做收尾工作
      */
-    public static final String END_HOUR = "自定义规则_收尾工作时长";
+    public static final String END_TIME = "自定义规则_收尾工作时长";
 
     /**
      * 自定义规则_收尾工作人数

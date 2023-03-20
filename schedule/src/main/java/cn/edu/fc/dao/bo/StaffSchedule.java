@@ -1,4 +1,4 @@
-package cn.edu.fc.scheduler;
+package cn.edu.fc.dao.bo;
 
 import cn.edu.fc.dao.bo.Staff;
 import lombok.AllArgsConstructor;

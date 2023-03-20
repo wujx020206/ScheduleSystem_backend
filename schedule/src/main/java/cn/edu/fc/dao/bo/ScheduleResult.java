@@ -1,4 +1,4 @@
-package cn.edu.fc.scheduler;
+package cn.edu.fc.dao.bo;
 
 import lombok.Getter;
 
@@ -11,7 +11,7 @@ public class ScheduleResult {
     @Getter
     private List<StaffSchedule> scheduleList;
 
-    ScheduleResult() {
+    public ScheduleResult() {
         scheduleList = new ArrayList<>();
     }
     public ScheduleResult insertEmpty(LocalDateTime start, LocalDateTime end, int duration) {

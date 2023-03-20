@@ -82,7 +82,6 @@ public class ControllerAspect {
                 response.setStatus(HttpServletResponse.SC_CREATED);
                 break;
 
-            case UNDELIVERABLE_NOTEXIST:
             case RESOURCE_ID_NOTEXIST:
                 // 404：资源不存在
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);

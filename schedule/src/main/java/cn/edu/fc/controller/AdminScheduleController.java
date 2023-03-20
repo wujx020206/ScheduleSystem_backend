@@ -21,19 +21,19 @@ public class AdminScheduleController {
         throw new NotImplementedException();
     }
 
-    @GetMapping("/day/{date}/{skill}/day")
+    @GetMapping("/day/{date}/skill/{skill}/day")
     public ReturnObject getScheduleByDayAndSkill(@RequestParam LocalDate date,
                                                  @RequestParam String skill) {
         throw new NotImplementedException();
     }
 
-    @GetMapping("/day/{date}/{position}/day")
+    @GetMapping("/day/{date}/position/{position}/day")
     public ReturnObject getScheduleByDayAndPosition(@RequestParam LocalDate date,
                                                     @RequestParam String position) {
         throw new NotImplementedException();
     }
 
-    @GetMapping("/day/{date}/{staffId}/day")
+    @GetMapping("/day/{date}/skill/{staffId}/day")
     public ReturnObject getScheduleByDayAndStaff(@RequestParam LocalDate date,
                                                  @RequestParam String staffId) {
         throw new NotImplementedException();

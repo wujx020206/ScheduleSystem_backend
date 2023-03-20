@@ -12,4 +12,6 @@ public class StaffSchedule {
     private Staff staff;
     private LocalDateTime start;
     private LocalDateTime end;
+    // unit: Half an Hour
+    private int duration;
 }

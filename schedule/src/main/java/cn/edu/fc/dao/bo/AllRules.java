@@ -3,6 +3,7 @@ package cn.edu.fc.dao.bo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Data
@@ -21,7 +22,7 @@ public class AllRules {
     private Integer lunchEnd;
     private Integer dinnerBegin;
     private Integer dinnerEnd;
-    private Integer breakTime;
+    private LocalTime breakTime;
     private Integer prepareTime;
     private Integer preparePeople;
     private List<String> prepareStation;

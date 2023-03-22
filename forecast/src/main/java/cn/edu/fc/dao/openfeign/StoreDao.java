@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient("store-service")
 public interface StoreDao {
     @GetMapping("/stores/{id}")
-    InternalReturnObject<Store> getStoreById(@PathVariable String id);
+    InternalReturnObject<Store> getStoreById(@PathVariable Long id);
 }

@@ -28,7 +28,7 @@ public class AdminForecastController {
     }
 
     @GetMapping("/{storeId}/data")
-    public ReturnObject getDataByStoreId(@PathVariable String storeId,
+    public ReturnObject getDataByStoreId(@PathVariable Long storeId,
                                          @RequestParam(required = false, defaultValue = "1") Integer page,
                                          @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
         PageDto<DataDto> ret = this.dataService.retrieveDataByStoreId(storeId, page, pageSize);
@@ -36,7 +36,7 @@ public class AdminForecastController {
     }
 
     @GetMapping("/{storeId}/period")
-    public ReturnObject getDataByPeriod(@PathVariable String storeId,
+    public ReturnObject getDataByPeriod(@PathVariable Long storeId,
                                         @Validated @RequestBody DateVo dateVo,
                                         @RequestParam(required = false, defaultValue = "1") Integer page,
                                         @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
@@ -45,7 +45,7 @@ public class AdminForecastController {
     }
 
     @GetMapping("/{storeId}/{date}/day")
-    public ReturnObject getDataByDay(@PathVariable String storeId,
+    public ReturnObject getDataByDay(@PathVariable Long storeId,
                                      @PathVariable LocalDate date,
                                      @RequestParam(required = false, defaultValue = "1") Integer page,
                                      @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
@@ -54,7 +54,7 @@ public class AdminForecastController {
     }
 
     @GetMapping("/{storeId}/{date}/{time}/day")
-    public ReturnObject getDataByDayAndTime(@PathVariable String storeId,
+    public ReturnObject getDataByDayAndTime(@PathVariable Long storeId,
                                             @PathVariable LocalDate date,
                                             @Validated @RequestBody TimeVo timeVo) {
         DataDto ret = this.dataService.findDataStoreIdAndDateAndBeginTimeAndEndTime(storeId, date, timeVo.getBeginTime(), timeVo.getEndTime());

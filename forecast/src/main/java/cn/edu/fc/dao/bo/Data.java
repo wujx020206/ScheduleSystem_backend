@@ -24,7 +24,7 @@ public class Data extends SSObject implements Serializable {
 
     @Getter
     @Setter
-    private String storeId;
+    private Long storeId;
 
     @Getter
     @Setter
@@ -62,8 +62,8 @@ public class Data extends SSObject implements Serializable {
     }
 
     @Builder
-    public Data(String id, Long creatorId, String creatorName, Long modifierId, String modifierName, LocalDateTime gmtCreate, LocalDateTime gmtModified,
-                String storeId, LocalDate date, String beginTime, String endTime, Float num) {
+    public Data(Long id, Long creatorId, String creatorName, Long modifierId, String modifierName, LocalDateTime gmtCreate, LocalDateTime gmtModified,
+                Long storeId, LocalDate date, String beginTime, String endTime, Float num) {
         super(id, creatorId, creatorName, modifierId, modifierName, gmtCreate, gmtModified);
         this.storeId = storeId;
         this.date = date;

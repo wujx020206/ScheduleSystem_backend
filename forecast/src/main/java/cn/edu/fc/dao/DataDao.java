@@ -60,7 +60,7 @@ public class DataDao {
         return po;
     }
 
-    public Data findById(String id) throws RuntimeException {
+    public Data findById(Long id) throws RuntimeException {
         if (null == id) {
             return null;
         }
@@ -81,7 +81,7 @@ public class DataDao {
         }
     }
 
-    public List<Data> retrieveByStoreId(String storeId, Integer page, Integer pageSize) {
+    public List<Data> retrieveByStoreId(Long storeId, Integer page, Integer pageSize) {
         List<DataPo> retList = this.dataPoMapper.findByStoreId(storeId, PageRequest.of(page, pageSize))
                 .stream().collect(Collectors.toList());
         if (null == retList || retList.size() == 0)
@@ -93,7 +93,7 @@ public class DataDao {
         return ret;
     }
 
-    public List<Data> retrieveByStoreIdAndDateBetween(String storeId, LocalDate beginDate, LocalDate endDate, Integer page, Integer pageSize) {
+    public List<Data> retrieveByStoreIdAndDateBetween(Long storeId, LocalDate beginDate, LocalDate endDate, Integer page, Integer pageSize) {
         List<DataPo> retList = this.dataPoMapper.findByStoreIdAndDateBetween(storeId, String.valueOf(beginDate), String.valueOf(endDate), PageRequest.of(page, pageSize))
                 .stream().collect(Collectors.toList());
         if (null == retList || retList.size() == 0)
@@ -105,7 +105,7 @@ public class DataDao {
         return ret;
     }
 
-    public List<Data> retrieveByStoreIdAndDate(String storeId, LocalDate date, Integer page, Integer pageSize) {
+    public List<Data> retrieveByStoreIdAndDate(Long storeId, LocalDate date, Integer page, Integer pageSize) {
         List<DataPo> retList = this.dataPoMapper.findByStoreIdAndDate(storeId, String.valueOf(date), PageRequest.of(page, pageSize))
                 .stream().collect(Collectors.toList());
         if (null == retList || retList.size() == 0)
@@ -117,7 +117,7 @@ public class DataDao {
         return ret;
     }
 
-    public Data findByStoreIdAndDateAndBeginTimeAndEndTime(String storeId, LocalDate date, String beginTime, String endTime) {
+    public Data findByStoreIdAndDateAndBeginTimeAndEndTime(Long storeId, LocalDate date, String beginTime, String endTime) {
         DataPo po = this.dataPoMapper.findByStoreIdAndDateAndBeginTimeAndEndTime(storeId, String.valueOf(date), beginTime, endTime);
         if (null == po) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), "预测数据", storeId));

@@ -9,12 +9,12 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 
 @Repository
-public interface DataPoMapper extends JpaRepository<DataPo, String> {
-    Page<DataPo> findByStoreId(String storeId, Pageable pageable);
+public interface DataPoMapper extends JpaRepository<DataPo, Long> {
+    Page<DataPo> findByStoreId(Long storeId, Pageable pageable);
 
-    Page<DataPo> findByStoreIdAndDateBetween(String storeId, String beginDate, String endDate, Pageable pageable);
+    Page<DataPo> findByStoreIdAndDateBetween(Long storeId, String beginDate, String endDate, Pageable pageable);
 
-    Page<DataPo> findByStoreIdAndDate(String storeId, String date, Pageable pageable);
+    Page<DataPo> findByStoreIdAndDate(Long storeId, String date, Pageable pageable);
 
-    DataPo findByStoreIdAndDateAndBeginTimeAndEndTime(String storeId, String date, String beginTime, String endTime);
+    DataPo findByStoreIdAndDateAndBeginTimeAndEndTime(Long storeId, String date, String beginTime, String endTime);
 }

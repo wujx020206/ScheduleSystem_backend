@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Builder
 public class Data {
-    private String storeId;
+    private Long storeId;
     private LocalDate date;
     private String beginTime;
     private String endTime;

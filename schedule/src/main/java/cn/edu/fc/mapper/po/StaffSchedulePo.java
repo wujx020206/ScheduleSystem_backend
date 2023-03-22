@@ -6,9 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,9 +17,9 @@ import java.time.LocalDateTime;
 @Builder
 public class StaffSchedulePo {
     @Id
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    private String id;
-    private String staffId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Long staffId;
     private LocalDateTime start;
     private LocalDateTime end;
 }

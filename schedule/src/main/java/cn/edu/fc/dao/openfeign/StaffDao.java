@@ -12,7 +12,7 @@ import java.util.List;
 @FeignClient("staff-service")
 public interface StaffDao {
     @GetMapping("/staff/{storeId}/staffs")
-    InternalReturnObject<PageDto<Staff>> retrieveAllStaffsByShopId(@PathVariable String storeId);
+    InternalReturnObject<PageDto<Staff>> retrieveAllStaffsByShopId(@PathVariable Long storeId);
     @GetMapping("/staff/positions")
     InternalReturnObject<List<String>> retrieveAllStaffPositions();
 }

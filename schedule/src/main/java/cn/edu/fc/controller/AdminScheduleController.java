@@ -35,7 +35,7 @@ public class AdminScheduleController {
 
     @GetMapping("/day/{date}/skill/{staffId}/day")
     public ReturnObject getScheduleByDayAndStaff(@RequestParam LocalDate date,
-                                                 @RequestParam String staffId) {
+                                                 @RequestParam Long staffId) {
         throw new NotImplementedException();
     }
 

@@ -26,7 +26,7 @@ public class Store extends SSObject implements Serializable {
     private Float size;
 
     @Builder
-    public Store(String id, Long creatorId, Long modifierId, String modifierName, String creatorName, LocalDateTime gmtCreate, LocalDateTime gmtModified,
+    public Store(Long id, Long creatorId, Long modifierId, String modifierName, String creatorName, LocalDateTime gmtCreate, LocalDateTime gmtModified,
                  String name, String address, Float size) {
         super(id, creatorId, creatorName, modifierId, modifierName, gmtCreate, gmtModified);
         this.name = name;

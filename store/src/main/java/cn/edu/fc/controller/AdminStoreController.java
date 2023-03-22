@@ -35,7 +35,7 @@ public class AdminStoreController {
     }
 
     @GetMapping("/{storeId}/store")
-    public ReturnObject getStore(@PathVariable String storeId) {
+    public ReturnObject getStore(@PathVariable Long storeId) {
         StoreDto ret = this.storeService.findStoreById(storeId);
         return new ReturnObject(ReturnNo.OK, ret);
     }
@@ -48,7 +48,7 @@ public class AdminStoreController {
     }
 
     @PutMapping("/{storeId}/store")
-    public ReturnObject updateStore(@PathVariable String storeId,
+    public ReturnObject updateStore(@PathVariable Long storeId,
                                     @Valid @RequestBody StoreVo vo,
                                     @LoginUser UserDto user) {
         this.storeService.updateStore(storeId, vo.getName(),vo.getAddress(), vo.getSize(), user);
@@ -56,7 +56,7 @@ public class AdminStoreController {
     }
 
     @DeleteMapping("/{storeId}/store")
-    public ReturnObject deleteStore(@PathVariable String storeId) {
+    public ReturnObject deleteStore(@PathVariable Long storeId) {
         this.storeService.deleteStore(storeId);
         return new ReturnObject(ReturnNo.OK);
     }

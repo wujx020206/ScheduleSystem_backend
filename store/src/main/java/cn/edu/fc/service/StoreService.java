@@ -36,7 +36,7 @@ public class StoreService {
         return new PageDto<>(ret, page, pageSize);
     }
 
-    public StoreDto findStoreById(String storeId) {
+    public StoreDto findStoreById(Long storeId) {
         Store store = this.storeDao.findById(storeId);
         StoreDto ret = StoreDto.builder().name(store.getName()).address(store.getAddress()).size(store.getSize()).build();
         return ret;
@@ -52,7 +52,7 @@ public class StoreService {
         this.storeDao.insert(store, user);
     }
 
-    public void updateStore(String storeId, String name, String address, Float size, UserDto user) {
+    public void updateStore(Long storeId, String name, String address, Float size, UserDto user) {
         Store store = this.storeDao.findByNameAndAddress(name, address);
         if (null == store) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), store.getId()));
@@ -64,7 +64,7 @@ public class StoreService {
         this.storeDao.save(storeId, store, user);
     }
 
-    public void deleteStore(String storeId) {
+    public void deleteStore(Long storeId) {
         Store store = this.storeDao.findById(storeId);
         if (null == store) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), store.getId()));

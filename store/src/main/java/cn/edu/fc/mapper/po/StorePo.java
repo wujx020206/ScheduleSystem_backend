@@ -6,9 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "store_store")
@@ -18,8 +16,8 @@ import javax.persistence.Table;
 @Builder
 public class StorePo {
     @Id
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
 

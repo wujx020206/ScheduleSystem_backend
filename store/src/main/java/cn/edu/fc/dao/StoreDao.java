@@ -49,7 +49,7 @@ public class StoreDao {
         return po;
     }
 
-    public Store findById(String id) throws RuntimeException {
+    public Store findById(Long id) throws RuntimeException {
         if (null == id) {
             return null;
         }
@@ -90,7 +90,7 @@ public class StoreDao {
         return getBo(po, Optional.empty());
     }
 
-    public String insert(Store store, UserDto user) throws RuntimeException {
+    public Long insert(Store store, UserDto user) throws RuntimeException {
         StorePo po = this.storePoMapper.findByNameAndAddress(store.getName(), store.getAddress());
         if (null == po) {
             StorePo storePo = getPo(store);
@@ -103,7 +103,7 @@ public class StoreDao {
         }
     }
 
-    public String save(String storeId, Store store, UserDto user) {
+    public String save(Long storeId, Store store, UserDto user) {
         StorePo po = getPo(store);
         po.setId(storeId);
         if (null != user) {
@@ -114,7 +114,7 @@ public class StoreDao {
         return String.format(KEY, store.getId());
     }
 
-    public void delete(String id) {
+    public void delete(Long id) {
         this.storePoMapper.deleteById(id);
     }
 }

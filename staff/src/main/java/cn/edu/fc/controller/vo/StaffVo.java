@@ -21,5 +21,5 @@ public class StaffVo {
     private String email;
 
     @NotNull
-    private String shopId;
+    private Long storeId;
 }

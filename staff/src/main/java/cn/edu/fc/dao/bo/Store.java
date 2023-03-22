@@ -16,11 +16,11 @@ public class Store extends SSObject {
 
     private String address;
 
-    private String size;
+    private Float size;
 
     @Builder
-    public Store(String id, Long creatorId, String creatorName, Long modifierId, String modifierName, LocalDateTime gmtCreate, LocalDateTime gmtModified,
-                 String name, String address, String size) {
+    public Store(Long id, Long creatorId, String creatorName, Long modifierId, String modifierName, LocalDateTime gmtCreate, LocalDateTime gmtModified,
+                 String name, String address, Float size) {
         super(id, creatorId, creatorName, modifierId, modifierName, gmtCreate, gmtModified);
         this.name = name;
         this.address = address;

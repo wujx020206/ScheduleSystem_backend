@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface StaffPoMapper extends JpaRepository<StaffPo, String> {
-    Page<StaffPo> findByStoreId(String storeId, Pageable pageable);
+public interface StaffPoMapper extends JpaRepository<StaffPo, Long> {
+    Page<StaffPo> findByStoreId(Long storeId, Pageable pageable);
 
     StaffPo findByNameAndPhone(String name, String phone);
 }

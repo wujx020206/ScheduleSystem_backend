@@ -29,7 +29,7 @@ public class InternalStaffController {
     }
 
     @GetMapping("/{staffId}/preferences/{type}/preference")
-    public ReturnObject getStaffPreferenceByType(@PathVariable String staffId,
+    public ReturnObject getStaffPreferenceByType(@PathVariable Long staffId,
                                                  @PathVariable Byte type) {
         PreferenceDto ret = this.preferenceService.retrievePreferencesByTypeAndStaffId(type, staffId);
         return new ReturnObject(ReturnNo.OK, ret);

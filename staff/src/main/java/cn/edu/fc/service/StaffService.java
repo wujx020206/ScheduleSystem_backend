@@ -40,7 +40,7 @@ public class StaffService {
         return new PageDto<>(ret, page, pageSize);
     }
 
-    public PageDto<StaffDto> retrieveStaffsByStoreId(String storeId, Integer page, Integer pageSize) {
+    public PageDto<StaffDto> retrieveStaffsByStoreId(Long storeId, Integer page, Integer pageSize) {
         List<Staff> staffs = this.staffDao.retrieveByShopId(storeId, page, pageSize);
         List<StaffDto> ret = staffs.stream().map(obj -> {
             StaffDto dto = StaffDto.builder().name(obj.getName()).position(obj.getPosition()).phone(obj.getPhone()).email(obj.getEmail()).shopName(obj.getStore().getName()).build();
@@ -49,13 +49,13 @@ public class StaffService {
         return new PageDto<>(ret, page, pageSize);
     }
 
-    public StaffDto findStaffById(String staffId) {
+    public StaffDto findStaffById(Long staffId) {
         Staff obj = this.staffDao.findById(staffId);
         StaffDto dto = StaffDto.builder().name(obj.getName()).position(obj.getPosition()).phone(obj.getPhone()).email(obj.getEmail()).shopName(obj.getStore().getName()).build();
         return dto;
     }
 
-    public void createStaff(String name, String position, String phone, String email, String shopId, UserDto user) {
+    public void createStaff(String name, String position, String phone, String email, Long shopId, UserDto user) {
         Store shop = this.storeDao.getStoreById(shopId).getData();
         if (null == shop) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), "商铺", shopId));
@@ -65,7 +65,7 @@ public class StaffService {
         this.staffDao.insert(staff, user);
     }
 
-    public void updateStaff(String staffId, String name, String position, String phone, String email, String shopId, UserDto user) {
+    public void updateStaff(Long staffId, String name, String position, String phone, String email, Long storeId, UserDto user) {
         Staff staff = this.staffDao.findById(staffId);
         if (null == staff) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), "员工", staffId));
@@ -75,11 +75,11 @@ public class StaffService {
         staff.setPosition(position);
         staff.setPhone(phone);
         staff.setEmail(email);
-        staff.setStoreId(shopId);
+        staff.setStoreId(storeId);
         this.staffDao.save(staffId, staff, user);
     }
 
-    public void deleteStaff(String staffId) {
+    public void deleteStaff(Long staffId) {
         Staff staff = this.staffDao.findById(staffId);
         if (null == staff) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), "员工", staffId));

@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class PreferencePo {
     private Byte type;
 
-    private String staffId;
+    private Long staffId;
 
     private String value;
 }

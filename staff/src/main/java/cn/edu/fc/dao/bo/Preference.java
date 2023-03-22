@@ -35,7 +35,7 @@ public class Preference implements Serializable {
 
     @Getter
     @Setter
-    private String staffId;
+    private Long staffId;
 
     @Getter
     @Setter
@@ -62,7 +62,7 @@ public class Preference implements Serializable {
     }
 
     @Builder
-    public Preference(Byte type, String staffId, String value) {
+    public Preference(Byte type, Long staffId, String value) {
         this.type = type;
         this.staffId = staffId;
         this.value = value;

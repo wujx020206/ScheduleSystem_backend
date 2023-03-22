@@ -40,7 +40,7 @@ public class PreferenceService {
         return new PageDto<>(ret, page, pageSize);
     }
 
-    public PageDto<PreferenceDto> retrievePreferencesByStaffId(String staffId, Integer page, Integer pageSize) {
+    public PageDto<PreferenceDto> retrievePreferencesByStaffId(Long staffId, Integer page, Integer pageSize) {
         List<Preference> preferences = this.preferenceDao.retrieveByStaffId(staffId, page, pageSize);
         List<PreferenceDto> ret = preferences.stream().map(obj -> {
             PreferenceDto dto = PreferenceDto.builder().type(obj.getType()).staffName(obj.getStaff().getName()).value(obj.getValue()).build();
@@ -58,13 +58,13 @@ public class PreferenceService {
         return new PageDto<>(ret, page, pageSize);
     }
 
-    public PreferenceDto retrievePreferencesByTypeAndStaffId(Byte type, String staffId) {
+    public PreferenceDto retrievePreferencesByTypeAndStaffId(Byte type, Long staffId) {
         Preference preference = this.preferenceDao.findByTypeAndStaffId(type, staffId);
         PreferenceDto dto = PreferenceDto.builder().type(preference.getType()).staffName(preference.getStaff().getName()).value(preference.getValue()).build();
         return dto;
     }
 
-    public void createPreference(String staffId, Byte type, String value, UserDto user) {
+    public void createPreference(Long staffId, Byte type, String value, UserDto user) {
         Staff staff = this.staffDao.findById(staffId);
         if (null == staff) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), "员工", staffId));
@@ -79,7 +79,7 @@ public class PreferenceService {
         this.preferenceDao.insert(obj);
     }
 
-    public void updatePreference(String staffId, Byte type, String value) {
+    public void updatePreference(Long staffId, Byte type, String value) {
         Preference preference = this.preferenceDao.findByTypeAndStaffId(type, staffId);
         if (null == preference) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), "员工偏好", staffId));
@@ -89,7 +89,7 @@ public class PreferenceService {
         this.preferenceDao.save(preference);
     }
 
-    public void deletePreference(Byte type, String staffId) {
+    public void deletePreference(Byte type, Long staffId) {
         Preference preference = this.preferenceDao.findByTypeAndStaffId(type, staffId);
         if (null == preference) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), "员工", staffId));

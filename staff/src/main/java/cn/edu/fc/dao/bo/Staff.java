@@ -69,7 +69,7 @@ public class Staff extends SSObject implements Serializable {
 
     @Getter
     @Setter
-    private String storeId;
+    private Long storeId;
 
     private Store store;
 
@@ -91,8 +91,8 @@ public class Staff extends SSObject implements Serializable {
     }
 
     @Builder
-    public Staff(String id, Long creatorId, Long modifierId, String modifierName, String creatorName, LocalDateTime gmtCreate, LocalDateTime gmtModified,
-                 String name, String position, String phone, String email, String storeId) {
+    public Staff(Long id, Long creatorId, Long modifierId, String modifierName, String creatorName, LocalDateTime gmtCreate, LocalDateTime gmtModified,
+                 String name, String position, String phone, String email, Long storeId) {
         super(id, creatorId, creatorName, modifierId, modifierName, gmtCreate, gmtModified);
         this.name = name;
         this.position = position;

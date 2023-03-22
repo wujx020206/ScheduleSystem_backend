@@ -49,7 +49,7 @@ public class StaffDao {
 
     private Staff getBo(StaffPo po, Optional<String> redisKey) {
         Staff bo = Staff.builder().name(po.getName()).position(po.getPosition()).phone(po.getPhone())
-                .email(po.getEmail()).storeId(po.getShopId()).build();
+                .email(po.getEmail()).storeId(po.getStoreId()).build();
         this.setBo(bo);
         redisKey.ifPresent(key -> redisUtil.set(key, bo, timeout));
         return bo;
@@ -60,11 +60,11 @@ public class StaffDao {
     }
 
     private StaffPo getPo(Staff bo) {
-        StaffPo po = StaffPo.builder().id(bo.getId()).name(bo.getName()).position(bo.getPosition()).phone(bo.getPhone()).email(bo.getEmail()).shopId(bo.getStoreId()).build();
+        StaffPo po = StaffPo.builder().id(bo.getId()).name(bo.getName()).position(bo.getPosition()).phone(bo.getPhone()).email(bo.getEmail()).storeId(bo.getStoreId()).build();
         return po;
     }
 
-    public Staff findById(String id) throws RuntimeException {
+    public Staff findById(Long id) throws RuntimeException {
         if (null == id) {
             return null;
         }
@@ -97,8 +97,8 @@ public class StaffDao {
         return ret;
     }
 
-    public List<Staff> retrieveByShopId(String shopId, Integer page, Integer pageSize) {
-        List<StaffPo> retList = this.staffPoMapper.findByStoreId(shopId, PageRequest.of(page, pageSize))
+    public List<Staff> retrieveByShopId(Long storeId, Integer page, Integer pageSize) {
+        List<StaffPo> retList = this.staffPoMapper.findByStoreId(storeId, PageRequest.of(page, pageSize))
                 .stream().collect(Collectors.toList());
         if (null == retList || retList.size() == 0)
             return new ArrayList<>();
@@ -109,7 +109,7 @@ public class StaffDao {
         return ret;
     }
 
-    public String insert(Staff staff, UserDto user) throws RuntimeException {
+    public Long insert(Staff staff, UserDto user) throws RuntimeException {
         StaffPo po = this.staffPoMapper.findByNameAndPhone(staff.getName(), staff.getPhone());
         if (null == po) {
             StaffPo staffPo = getPo(staff);
@@ -122,7 +122,7 @@ public class StaffDao {
         }
     }
 
-    public String save(String staffId, Staff staff, UserDto user) {
+    public String save(Long staffId, Staff staff, UserDto user) {
         StaffPo po = getPo(staff);
         po.setId(staffId);
         if (null != user) {
@@ -133,7 +133,7 @@ public class StaffDao {
         return String.format(KEY, staff.getId());
     }
 
-    public void delete(String id) {
+    public void delete(Long id) {
         this.staffPoMapper.deleteById(id);
     }
 }

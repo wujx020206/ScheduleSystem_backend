@@ -16,8 +16,8 @@ import javax.persistence.*;
 @Builder
 public class StaffPo {
     @Id
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
 
@@ -27,5 +27,5 @@ public class StaffPo {
 
     private String email;
 
-    private String shopId;
+    private Long storeId;
 }

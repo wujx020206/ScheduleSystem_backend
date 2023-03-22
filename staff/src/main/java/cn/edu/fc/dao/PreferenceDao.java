@@ -75,7 +75,7 @@ public class PreferenceDao {
         return ret;
     }
 
-    public List<Preference> retrieveByStaffId(String staffId, Integer page, Integer pageSize) {
+    public List<Preference> retrieveByStaffId(Long staffId, Integer page, Integer pageSize) {
         List<PreferencePo> retList = this.preferencePoMapper.findByStaffId(staffId, PageRequest.of(page, pageSize))
                 .stream().collect(Collectors.toList());
         if (null == retList || retList.size() == 0)
@@ -99,7 +99,7 @@ public class PreferenceDao {
         return ret;
     }
 
-    public Preference findByTypeAndStaffId(Byte type, String staffId) {
+    public Preference findByTypeAndStaffId(Byte type, Long staffId) {
         PreferencePo preferencePo = this.preferencePoMapper.findByTypeAndStaffId(type, staffId);
         if (null == preferencePo) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), "员工偏好", staffId));
@@ -120,7 +120,7 @@ public class PreferenceDao {
         this.preferencePoMapper.save(po);
     }
 
-    public void delete(Byte type, String id) {
+    public void delete(Byte type,Long id) {
         this.preferencePoMapper.deleteByTypeAndStaffId(type, id);
     }
 }

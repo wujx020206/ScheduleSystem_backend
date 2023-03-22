@@ -7,12 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PreferencePoMapper extends JpaRepository<PreferencePo, String> {
-    Page<PreferencePo> findByStaffId(String staffId, Pageable pageable);
+public interface PreferencePoMapper extends JpaRepository<PreferencePo, Long> {
+    Page<PreferencePo> findByStaffId(Long staffId, Pageable pageable);
 
     Page<PreferencePo> findByType(Byte type, Pageable pageable);
 
-    PreferencePo findByTypeAndStaffId(Byte type, String staffId);
+    PreferencePo findByTypeAndStaffId(Byte type, Long staffId);
 
-    void deleteByTypeAndStaffId(Byte type, String staffId);
+    void deleteByTypeAndStaffId(Byte type, Long staffId);
 }

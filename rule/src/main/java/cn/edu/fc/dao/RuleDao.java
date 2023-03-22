@@ -59,7 +59,7 @@ public class RuleDao {
         return po;
     }
 
-    public Rule findById(String id) throws RuntimeException {
+    public Rule findById(Long id) throws RuntimeException {
         if (null == id) {
             return null;
         }
@@ -92,7 +92,7 @@ public class RuleDao {
         return ret;
     }
 
-    public List<Rule> retrieveByStoreId(String storeId, Integer page, Integer pageSize) throws RuntimeException {
+    public List<Rule> retrieveByStoreId(Long storeId, Integer page, Integer pageSize) throws RuntimeException {
         List<RulePo> retList = this.rulePoMapper.findByStoreId(storeId, PageRequest.of(page, pageSize))
                 .stream().collect(Collectors.toList());
         if (null == retList || retList.size() == 0)
@@ -104,7 +104,19 @@ public class RuleDao {
         return ret;
     }
 
-    public Rule findByTypeAndStoreId(String type, String storeId) {
+    public List<Rule> retrieveByStoreId(Long storeId) throws RuntimeException {
+        List<RulePo> retList = this.rulePoMapper.findByStoreId(storeId)
+                .stream().collect(Collectors.toList());
+        if (null == retList || retList.size() == 0)
+            return new ArrayList<>();
+
+        List<Rule> ret = retList.stream().map(po->{
+            return getBo(po,Optional.ofNullable(null));
+        }).collect(Collectors.toList());
+        return ret;
+    }
+
+    public Rule findByTypeAndStoreId(String type, Long storeId) {
         RulePo po = this.rulePoMapper.findByTypeAndStoreId(type, storeId);
         if (null == po) {
             return null;
@@ -113,7 +125,7 @@ public class RuleDao {
         return getBo(po, Optional.empty());
     }
 
-    public String insert(Rule rule, UserDto user) throws RuntimeException {
+    public Long insert(Rule rule, UserDto user) throws RuntimeException {
         RulePo po = this.rulePoMapper.findByTypeAndStoreId(rule.getType(), rule.getStoreId());
         if (null == po) {
             RulePo rulePo = getPo(rule);
@@ -126,7 +138,7 @@ public class RuleDao {
         }
     }
 
-    public String save(String ruleId, Rule rule, UserDto user) {
+    public String save(Long ruleId, Rule rule, UserDto user) {
         RulePo po = getPo(rule);
         po.setId(ruleId);
         if (null != user) {

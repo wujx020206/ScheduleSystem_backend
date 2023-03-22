@@ -4,6 +4,7 @@ import cn.edu.fc.javaee.core.model.ReturnNo;
 import cn.edu.fc.javaee.core.model.ReturnObject;
 import cn.edu.fc.javaee.core.model.dto.PageDto;
 import cn.edu.fc.service.RuleService;
+import cn.edu.fc.service.dto.AllRulesDto;
 import cn.edu.fc.service.dto.RuleDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,7 @@ public class InternalRuleController {
     }
 
     @GetMapping("/{storeId}/rules")
-    public ReturnObject getStoreRules(@PathVariable String storeId,
+    public ReturnObject getStoreRules(@PathVariable Long storeId,
                                       @RequestParam(required = false, defaultValue = "1") Integer page,
                                       @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
         PageDto<RuleDto> ret = this.ruleService.retrieveRulesByStoreId(storeId, page, pageSize);
@@ -31,9 +32,15 @@ public class InternalRuleController {
     }
 
     @GetMapping("/{storeId}/{type}/rule")
-    public ReturnObject getStoreRuleByType(@PathVariable String storeId,
+    public ReturnObject getStoreRuleByType(@PathVariable Long storeId,
                                            @PathVariable String type) {
         RuleDto ret = this.ruleService.findByStoreIdAndType(storeId, type);
+        return new ReturnObject(ReturnNo.OK, ret);
+    }
+
+    @GetMapping("/rule/{storeId}/rules")
+    public ReturnObject getAllRules(@PathVariable Long storeId) {
+        AllRulesDto ret = this.ruleService.retrieveAllRules(storeId);
         return new ReturnObject(ReturnNo.OK, ret);
     }
 }

@@ -35,7 +35,7 @@ public class AdminRuleController {
     }
 
     @GetMapping("/{storeId}/rules")
-    public ReturnObject getStoreRules(@PathVariable String storeId,
+    public ReturnObject getStoreRules(@PathVariable Long storeId,
                                       @RequestParam(required = false, defaultValue = "1") Integer page,
                                       @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
         PageDto<RuleDto> ret = this.ruleService.retrieveRulesByStoreId(storeId, page, pageSize);
@@ -43,14 +43,14 @@ public class AdminRuleController {
     }
 
     @GetMapping("/{storeId}/{type}/rule")
-    public ReturnObject getStoreRuleByType(@PathVariable String storeId,
+    public ReturnObject getStoreRuleByType(@PathVariable Long storeId,
                                            @PathVariable String type) {
         RuleDto ret = this.ruleService.findByStoreIdAndType(storeId, type);
         return new ReturnObject(ReturnNo.OK, ret);
     }
 
     @PutMapping("/{storeId}/{type}/rule")
-    public ReturnObject updateStoreRuleByType(@PathVariable String storeId,
+    public ReturnObject updateStoreRuleByType(@PathVariable Long storeId,
                                               @PathVariable String type,
                                               @Valid @RequestBody RuleVo vo,
                                               @LoginUser UserDto user) {

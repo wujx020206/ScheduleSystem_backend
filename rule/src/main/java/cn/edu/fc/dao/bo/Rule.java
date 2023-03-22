@@ -215,7 +215,7 @@ public class Rule extends SSObject implements Serializable {
 
     @Getter
     @Setter
-    private String storeId;
+    private Long storeId;
 
     private Store store;
 
@@ -237,8 +237,8 @@ public class Rule extends SSObject implements Serializable {
     }
 
     @Builder
-    public Rule(String id, Long creatorId, Long modifierId, String modifierName, String creatorName, LocalDateTime gmtCreate, LocalDateTime gmtModified,
-                String type, String value, String storeId) {
+    public Rule(Long id, Long creatorId, Long modifierId, String modifierName, String creatorName, LocalDateTime gmtCreate, LocalDateTime gmtModified,
+                String type, String value, Long storeId) {
         super(id, creatorId, creatorName, modifierId, modifierName, gmtCreate, gmtModified);
         this.type = type;
         this.value = value;

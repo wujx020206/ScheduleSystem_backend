@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SSObject implements Cloneable{
 
-    protected String id;
+    protected Long id;
     /**
      * 创建者id
      */

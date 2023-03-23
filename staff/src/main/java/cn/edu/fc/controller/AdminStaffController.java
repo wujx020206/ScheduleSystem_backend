@@ -55,6 +55,14 @@ public class AdminStaffController {
         return new ReturnObject(ReturnNo.OK, ret);
     }
 
+    @GetMapping("/{staffName}/staff")
+    public ReturnObject findStaffByName(@PathVariable String name,
+                                        @RequestParam(required = false, defaultValue = "1") Integer page,
+                                        @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
+        PageDto<StaffDto> ret = this.staffService.retrieveStaffByName(name, page, pageSize);
+        return new ReturnObject(ReturnNo.OK, ret);
+    }
+
     @PostMapping("/staff")
     public ReturnObject createStaff(@Valid @RequestBody StaffVo vo,
                                     @LoginUser UserDto user) {

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/internal", produces = "application/json;charset=UTF-8")
 public class InternalStaffController {
@@ -32,6 +34,18 @@ public class InternalStaffController {
     public ReturnObject getStaffPreferenceByType(@PathVariable Long staffId,
                                                  @PathVariable Byte type) {
         PreferenceDto ret = this.preferenceService.retrievePreferencesByTypeAndStaffId(type, staffId);
+        return new ReturnObject(ReturnNo.OK, ret);
+    }
+
+    @GetMapping("/staff/positions")
+    public ReturnObject getPositions() {
+        List<String> ret = this.staffService.retrievePositions();
+        return new ReturnObject(ReturnNo.OK, ret);
+    }
+
+    @GetMapping("/staff/skills")
+    public ReturnObject getSkills() {
+        List<String> ret = this.staffService.retrieveSkills();
         return new ReturnObject(ReturnNo.OK, ret);
     }
 }

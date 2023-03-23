@@ -11,4 +11,6 @@ public interface StaffPoMapper extends JpaRepository<StaffPo, Long> {
     Page<StaffPo> findByStoreId(Long storeId, Pageable pageable);
 
     StaffPo findByNameAndPhone(String name, String phone);
+
+    Page<StaffPo> findByName(String name, Pageable pageable);
 }

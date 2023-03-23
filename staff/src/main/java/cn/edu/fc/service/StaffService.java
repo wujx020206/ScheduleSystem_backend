@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,6 +54,34 @@ public class StaffService {
         Staff obj = this.staffDao.findById(staffId);
         StaffDto dto = StaffDto.builder().name(obj.getName()).position(obj.getPosition()).phone(obj.getPhone()).email(obj.getEmail()).shopName(obj.getStore().getName()).build();
         return dto;
+    }
+
+    public PageDto<StaffDto> retrieveStaffByName(String name, Integer page, Integer pageSize) {
+        List<Staff> staffs = this.staffDao.retrieveByName(name, page, pageSize);
+        List<StaffDto> ret = staffs.stream().map(obj -> {
+            StaffDto dto = StaffDto.builder().name(obj.getName()).position(obj.getPosition()).phone(obj.getPhone()).email(obj.getEmail()).shopName(obj.getStore().getName()).build();
+            return dto;
+        }).collect(Collectors.toList());
+        return new PageDto<>(ret, page, pageSize);
+    }
+
+    public List<String> retrievePositions() {
+        List<String> ret = new ArrayList();
+        ret.add("STOREMANAGER");
+        ret.add("ASSISTANTMANAGER");
+        ret.add("TEAMLEADER");
+        ret.add("CASHIER");
+        ret.add("GUIDE");
+        ret.add("WAREHOUSE");
+        return ret;
+    }
+
+    public List<String> retrieveSkills() {
+        List<String> ret = new ArrayList();
+        ret.add("CASHIER");
+        ret.add("GUIDE");
+        ret.add("WAREHOUSE");
+        return ret;
     }
 
     public void createStaff(String name, String position, String phone, String email, Long shopId, UserDto user) {

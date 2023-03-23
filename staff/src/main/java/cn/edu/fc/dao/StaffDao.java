@@ -109,6 +109,18 @@ public class StaffDao {
         return ret;
     }
 
+    public List<Staff> retrieveByName(String name, Integer page, Integer pageSize) {
+        List<StaffPo> retList = this.staffPoMapper.findByName(name, PageRequest.of(page, pageSize))
+                .stream().collect(Collectors.toList());
+        if (null == retList || retList.size() == 0)
+            return new ArrayList<>();
+
+        List<Staff> ret = retList.stream().map(po->{
+            return getBo(po,Optional.ofNullable(null));
+        }).collect(Collectors.toList());
+        return ret;
+    }
+
     public Long insert(Staff staff, UserDto user) throws RuntimeException {
         StaffPo po = this.staffPoMapper.findByNameAndPhone(staff.getName(), staff.getPhone());
         if (null == po) {

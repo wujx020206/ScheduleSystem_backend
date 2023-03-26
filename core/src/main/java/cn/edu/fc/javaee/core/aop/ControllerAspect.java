@@ -29,10 +29,10 @@ public class ControllerAspect {
 
     private final Logger logger = LoggerFactory.getLogger(ControllerAspect.class);
 
-    @Value("${oomall.core.page-size.max}")
+    @Value("${schedulesystem.core.page-size.max}")
     private int max_page_size;
 
-    @Value("${oomall.core.page-size.default}")
+    @Value("${schedulesystem.core.page-size.default}")
     private int default_page_size;
 
     /**

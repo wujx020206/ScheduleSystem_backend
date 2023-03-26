@@ -11,7 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,8 @@ import java.util.stream.Collectors;
 import static cn.edu.fc.javaee.core.util.Common.putGmtFields;
 import static cn.edu.fc.javaee.core.util.Common.putUserFields;
 
+@Repository
+@RefreshScope
 public class StoreDao {
     private final static Logger logger = LoggerFactory.getLogger(StoreDao.class);
 
@@ -34,8 +38,9 @@ public class StoreDao {
     private RedisUtil redisUtil;
 
     @Autowired
-    public StoreDao(StorePoMapper storePoMapper) {
+    public StoreDao(StorePoMapper storePoMapper, RedisUtil redisUtil) {
         this.storePoMapper = storePoMapper;
+        this.redisUtil = redisUtil;
     }
 
     private Store getBo(StorePo po, Optional<String> redisKey) {

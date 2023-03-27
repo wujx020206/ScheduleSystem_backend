@@ -1,6 +1,7 @@
 package cn.edu.fc.controller;
 
 import cn.edu.fc.controller.vo.StoreVo;
+import cn.edu.fc.javaee.core.aop.Audit;
 import cn.edu.fc.javaee.core.aop.LoginUser;
 import cn.edu.fc.javaee.core.model.ReturnNo;
 import cn.edu.fc.javaee.core.model.ReturnObject;
@@ -11,11 +12,13 @@ import cn.edu.fc.service.dto.StoreDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
+//@ComponentScan(basePackages = {"cn.edu.fc.schedulesystem.dao"})
 @RequestMapping(value = "/store", produces = "application/json;charset=UTF-8")
 public class AdminStoreController {
     private final Logger logger = LoggerFactory.getLogger(AdminStoreController.class);
@@ -28,6 +31,7 @@ public class AdminStoreController {
     }
 
     @GetMapping("/stores")
+    @Audit(departName = "stores")
     public ReturnObject getStores(@RequestParam(required = false, defaultValue = "1") Integer page,
                                   @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
         PageDto<StoreDto> ret = this.storeService.retrieveStores(page, pageSize);
@@ -35,6 +39,7 @@ public class AdminStoreController {
     }
 
     @GetMapping("/{storeId}/store")
+    @Audit(departName = "stores")
     public ReturnObject getStore(@PathVariable Long storeId) {
         StoreDto ret = this.storeService.findStoreById(storeId);
         return new ReturnObject(ReturnNo.OK, ret);

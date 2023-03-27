@@ -20,7 +20,7 @@ public enum ReturnNo {
     RESOURCE_FALSIFY(11, "信息签名不正确"),
 
     //状态码 404
-    RESOURCE_ID_NOTEXIST(4,"%s对象(id=%s)不存在"),
+    RESOURCE_ID_NOTEXIST(4,"%s对象(id=%d)不存在"),
 
     //状态码 500
     INTERNAL_SERVER_ERR(2,"服务器内部错误"),

@@ -1,6 +1,7 @@
 package cn.edu.fc.store.controller;
 
 import cn.edu.fc.StoreApplication;
+import cn.edu.fc.dao.StoreDao;
 import cn.edu.fc.javaee.core.model.InternalReturnObject;
 import cn.edu.fc.javaee.core.util.JwtHelper;
 import cn.edu.fc.javaee.core.util.RedisUtil;
@@ -31,9 +32,14 @@ public class StoreControllerTest {
     @MockBean
     private RedisUtil redisUtil;
 
+    @Autowired
+    private StoreDao storeDao;
+
     private static String adminToken;
 
     private static final String RETRIEVE_STORES = "/store/stores";
+
+    private static final String FIND_STORE = "/store/{storeId}/store";
 
     private static final String DELETE_STORE = "/store/{storeId}/store";
 
@@ -63,13 +69,31 @@ public class StoreControllerTest {
     }
 
     @Test
+    public void findStoreById() throws Exception {
+        Mockito.when(redisUtil.hasKey(Mockito.anyString())).thenReturn(false);
+        Mockito.when(redisUtil.set(Mockito.anyString(), Mockito.any(), Mockito.anyLong())).thenReturn(true);
+
+        this.mockMvc.perform(MockMvcRequestBuilders.get(FIND_STORE,1)
+                        .header("authorization", adminToken)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .param("page", "1")
+                        .param("pageSize", "10"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.id", is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.name", is("门店1")))
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn().getResponse().getContentAsString();
+    }
+
+    @Test
     public void deleteStore() throws Exception {
         Mockito.when(redisUtil.hasKey(Mockito.anyString())).thenReturn(false);
         Mockito.when(redisUtil.set(Mockito.anyString(), Mockito.any(), Mockito.anyLong())).thenReturn(true);
         Mockito.when(redisUtil.bfExist(Mockito.anyString(), (Long) Mockito.any())).thenReturn(false);
         Mockito.when(redisUtil.bfAdd(Mockito.anyString(), Mockito.any())).thenReturn(true);
 
-        this.mockMvc.perform(MockMvcRequestBuilders.delete("/store/1/store")
+        this.mockMvc.perform(MockMvcRequestBuilders.delete(DELETE_STORE,1)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .header("authorization", adminToken))
                 .andExpect(MockMvcResultMatchers.status().isOk())

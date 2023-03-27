@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Builder
 public class StoreDto {
+    private Long id;
+
     private String name;
 
     private String address;

@@ -63,12 +63,12 @@
 
 
     <!-- 日志输出级别 -->
-    <logger name="cn.edu.xmu.oomall.payment" level = "INFO"/>
-    <logger name="cn.edu.xmu.oomall.payment.controller" level = "INFO"/>
-    <logger name="cn.edu.xmu.oomall.payment.service" level = "INFO"/>
-    <logger name="cn.edu.xmu.oomall.payment.dao" level = "INFO"/>
-    <logger name="cn.edu.xmu.oomall.payment.mapper" level = "DEBUG"/>
-    <logger name="cn.edu.xmu.javaee.core" level = "INFO"/>
+    <logger name="cn.edu.fc.schedulesystem.store" level = "INFO"/>
+    <logger name="cn.edu.fc.schedulesystem.store.controller" level = "INFO"/>
+    <logger name="cn.edu.fc.schedulesystem.store.service" level = "INFO"/>
+    <logger name="cn.edu.fc.schedulesystem.store.dao" level = "INFO"/>
+    <logger name="cn.edu.fc.schedulesystem.store.mapper" level = "DEBUG"/>
+    <logger name="cn.edu.fc.javaee.core" level = "INFO"/>
     <logger name="cn.edu.fc.javaee.core.util.Common" level = "INFO"/>
     <root level="INFO">
         <appender-ref ref="STDOUT" />

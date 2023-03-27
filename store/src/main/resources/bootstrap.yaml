@@ -6,6 +6,5 @@ spring:
         file-extension: yaml
     inetutils:
       ignored-interfaces: eth.*
-      preferred-networks: 10.0.1.;192.168.31.
   application:
     name: store-service

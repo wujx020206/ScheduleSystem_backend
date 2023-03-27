@@ -2,6 +2,7 @@ package cn.edu.fc.dao;
 
 import cn.edu.fc.dao.bo.Store;
 import cn.edu.fc.javaee.core.exception.BusinessException;
+import cn.edu.fc.javaee.core.model.Constants;
 import cn.edu.fc.javaee.core.model.ReturnNo;
 import cn.edu.fc.javaee.core.model.dto.UserDto;
 import cn.edu.fc.javaee.core.util.RedisUtil;
@@ -28,7 +29,7 @@ import static cn.edu.fc.javaee.core.util.Common.putUserFields;
 public class StoreDao {
     private final static Logger logger = LoggerFactory.getLogger(StoreDao.class);
 
-    private final static String KEY = "E%s";
+    private final static String KEY = "E%d";
 
     @Value("3600")
     private int timeout;
@@ -44,7 +45,7 @@ public class StoreDao {
     }
 
     private Store getBo(StorePo po, Optional<String> redisKey) {
-        Store bo = Store.builder().name(po.getName()).address(po.getAddress()).size(po.getSize()).build();
+        Store bo = Store.builder().id(po.getId()).name(po.getName()).address(po.getAddress()).size(po.getSize()).build();
         redisKey.ifPresent(key -> redisUtil.set(key, bo, timeout));
         return bo;
     }
@@ -75,9 +76,9 @@ public class StoreDao {
     }
 
     public List<Store> retrieveAll(Integer page, Integer pageSize) throws RuntimeException {
-        List<StorePo> retList = this.storePoMapper.findAll(PageRequest.of(page, pageSize))
+        List<StorePo> retList = this.storePoMapper.findAll(PageRequest.of(0, Constants.MAX_RETURN))
                 .stream().collect(Collectors.toList());
-        if (null == retList || retList.size() == 0)
+        if (retList.size() == 0)
             return new ArrayList<>();
 
         List<Store> ret = retList.stream().map(po->{

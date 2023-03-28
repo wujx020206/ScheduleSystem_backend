@@ -45,6 +45,13 @@ public class StoreService {
     }
 
     @Transactional
+    public StoreDto findStoreByName(String name) {
+        Store store = this.storeDao.findByName(name);
+        StoreDto ret = StoreDto.builder().id(store.getId()).name(name).address(store.getAddress()).size(store.getSize()).build();
+        return ret;
+    }
+
+    @Transactional
     public void createStore(String name, String address, Float size, UserDto user) {
         Store store = this.storeDao.findByNameAndAddress(name, address);
         if (null != store) {

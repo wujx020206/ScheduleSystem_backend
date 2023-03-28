@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StorePoMapper extends JpaRepository<StorePo, Long> {
     StorePo findByNameAndAddress(String name, String address);
+
+    StorePo findByName(String name);
 }

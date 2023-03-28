@@ -37,7 +37,7 @@ public class AdminStoreController {
         return new ReturnObject(ReturnNo.OK, ret);
     }
 
-    @GetMapping("/{storeId}/store")
+    @GetMapping("/id/{storeId}/store")
     //@Audit(departName = "stores")
     public ReturnObject getStore(@PathVariable Long storeId) {
         StoreDto ret = this.storeService.findStoreById(storeId);
@@ -57,6 +57,12 @@ public class AdminStoreController {
                                     @LoginUser UserDto user) {
         this.storeService.updateStore(storeId, vo.getName(),vo.getAddress(), vo.getSize(), user);
         return new ReturnObject(ReturnNo.OK);
+    }
+
+    @GetMapping("/name/{storeName}/store")
+    public ReturnObject getStoreByName(@PathVariable String name) {
+        StoreDto ret = this.storeService.findStoreByName(name);
+        return new ReturnObject(ReturnNo.OK, ret);
     }
 
     @DeleteMapping("/{storeId}/store")

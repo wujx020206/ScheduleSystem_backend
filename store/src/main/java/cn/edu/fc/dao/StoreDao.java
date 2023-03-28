@@ -87,6 +87,15 @@ public class StoreDao {
         return ret;
     }
 
+    public Store findByName(String name) {
+        StorePo po = this.storePoMapper.findByName(name);
+        if (null == po) {
+            throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), null));
+        }
+
+        return getBo(po, Optional.empty());
+    }
+
     public Store findByNameAndAddress(String name, String address) {
         StorePo po = this.storePoMapper.findByNameAndAddress(name, address);
         if (null == po) {

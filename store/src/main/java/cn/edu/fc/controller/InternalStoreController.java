@@ -4,7 +4,6 @@ import cn.edu.fc.javaee.core.model.ReturnNo;
 import cn.edu.fc.javaee.core.model.ReturnObject;
 import cn.edu.fc.service.StoreService;
 import cn.edu.fc.service.dto.StoreDto;
-import com.google.protobuf.Internal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

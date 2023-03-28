@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-//@ComponentScan(basePackages = {"cn.edu.fc.schedulesystem.dao"})
 @RequestMapping(value = "/store", produces = "application/json;charset=UTF-8")
 public class AdminStoreController {
     private final Logger logger = LoggerFactory.getLogger(AdminStoreController.class);
@@ -31,7 +30,7 @@ public class AdminStoreController {
     }
 
     @GetMapping("/stores")
-    @Audit(departName = "stores")
+    //@Audit(departName = "stores")
     public ReturnObject getStores(@RequestParam(required = false, defaultValue = "1") Integer page,
                                   @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
         PageDto<StoreDto> ret = this.storeService.retrieveStores(page, pageSize);
@@ -39,7 +38,7 @@ public class AdminStoreController {
     }
 
     @GetMapping("/{storeId}/store")
-    @Audit(departName = "stores")
+    //@Audit(departName = "stores")
     public ReturnObject getStore(@PathVariable Long storeId) {
         StoreDto ret = this.storeService.findStoreById(storeId);
         return new ReturnObject(ReturnNo.OK, ret);

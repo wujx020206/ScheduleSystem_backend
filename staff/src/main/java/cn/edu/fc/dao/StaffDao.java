@@ -3,6 +3,7 @@ package cn.edu.fc.dao;
 import cn.edu.fc.dao.bo.Staff;
 import cn.edu.fc.dao.openfeign.StoreDao;
 import cn.edu.fc.javaee.core.exception.BusinessException;
+import cn.edu.fc.javaee.core.model.Constants;
 import cn.edu.fc.javaee.core.model.ReturnNo;
 import cn.edu.fc.javaee.core.model.dto.UserDto;
 import cn.edu.fc.javaee.core.util.RedisUtil;
@@ -86,7 +87,7 @@ public class StaffDao {
     }
 
     public List<Staff> retrieveAll(Integer page, Integer pageSize) throws RuntimeException {
-        List<StaffPo> retList = this.staffPoMapper.findAll(PageRequest.of(page, pageSize))
+        List<StaffPo> retList = this.staffPoMapper.findAll(PageRequest.of(0, Constants.MAX_RETURN))
                 .stream().collect(Collectors.toList());
         if (null == retList || retList.size() == 0)
             return new ArrayList<>();

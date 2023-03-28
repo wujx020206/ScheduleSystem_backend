@@ -6,14 +6,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@Table(name = "staff_preference")
+@Entity
+@Table(name = "preference")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class PreferencePo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private Byte type;
 
     private Long staffId;

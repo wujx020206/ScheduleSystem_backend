@@ -8,16 +8,12 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-
-import javax.persistence.Entity;
 
 @SpringBootApplication(scanBasePackages = {"cn.edu.fc.javaee.core",
         "cn.edu.fc.schedulesystem.store"})
 @ComponentScan(basePackages = {"cn.edu.fc.*"})
 @EnableJpaRepositories(value = {"cn.edu.fc.dao"}, repositoryBaseClass = SelectiveUpdateJpaRepositoryImpl.class, basePackages = "cn.edu.fc.mapper")
 @EntityScan("cn.edu.fc.*")
-@EnableMongoRepositories(basePackages = "cn.edu.fc.schedulesystem.store.mapper")
 @EnableFeignClients
 @EnableDiscoveryClient
 public class StoreApplication {

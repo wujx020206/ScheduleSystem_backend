@@ -71,7 +71,7 @@ public class StoreDao {
         if (po.isPresent()) {
             return this.getBo(po.get(), Optional.of(key));
         } else {
-            throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), "员工偏好", id));
+            throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), "商铺", id));
         }
     }
 

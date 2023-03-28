@@ -62,10 +62,10 @@ public class StoreDao {
 
         String key = String.format(KEY, id);
 
-        if (redisUtil.hasKey(key)) {
+        /*if (redisUtil.hasKey(key)) {
             Store bo = (Store) redisUtil.get(key);
             return bo;
-        }
+        }*/
 
         Optional<StorePo> po = this.storePoMapper.findById(id);
         if (po.isPresent()) {

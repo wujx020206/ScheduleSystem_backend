@@ -33,6 +33,10 @@ public class StaffControllerTest {
 
     private static final String RETRIEVE_STAFFS = "/staff/staffs";
 
+    private static final String CREATE_STAFF = "/staff/staff";
+
+    private static final String UPDATE_STAFF = "/staff/{storeId}/staff";
+
     private static final String DELETE_STAFF = "/staff/{staffId}/staff";
 
     @BeforeAll
@@ -42,7 +46,7 @@ public class StaffControllerTest {
     }
 
     @Test
-    public void retrieveStores() throws Exception {
+    public void retrieveStaffs() throws Exception {
         Mockito.when(redisUtil.hasKey(Mockito.anyString())).thenReturn(false);
         Mockito.when(redisUtil.set(Mockito.anyString(), Mockito.any(), Mockito.anyLong())).thenReturn(true);
 
@@ -60,7 +64,45 @@ public class StaffControllerTest {
     }
 
     @Test
-    public void deleteStore() throws Exception {
+    public void createStaff() throws Exception {
+        Mockito.when(redisUtil.hasKey(Mockito.anyString())).thenReturn(false);
+        Mockito.when(redisUtil.set(Mockito.anyString(), Mockito.any(), Mockito.anyLong())).thenReturn(true);
+        Mockito.when(redisUtil.bfExist(Mockito.anyString(), (Long) Mockito.any())).thenReturn(false);
+        Mockito.when(redisUtil.bfAdd(Mockito.anyString(), Mockito.any())).thenReturn(true);
+
+        String requestJson="{\"name\": \"xicha\", \"position\": \"123\",\"phone\": \"123.0\", \"email\":\"123@qq.com\",\"storeId\": 1}";
+        this.mockMvc.perform(MockMvcRequestBuilders.post(CREATE_STAFF)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header("authorization", adminToken)
+                        .content(requestJson))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.errno").value(1))
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn().getResponse().getContentAsString();
+    }
+
+    @Test
+    public void updateStaff() throws Exception {
+        Mockito.when(redisUtil.hasKey(Mockito.anyString())).thenReturn(false);
+        Mockito.when(redisUtil.set(Mockito.anyString(), Mockito.any(), Mockito.anyLong())).thenReturn(true);
+        Mockito.when(redisUtil.bfExist(Mockito.anyString(), (Long) Mockito.any())).thenReturn(false);
+        Mockito.when(redisUtil.bfAdd(Mockito.anyString(), Mockito.any())).thenReturn(true);
+
+        String requestJson="{\"name\": \"xicha\", \"position\": \"123\",\"phone\": \"123.0\", \"email\":\"123@qq.com\",\"storeId\": 1}";
+        this.mockMvc.perform(MockMvcRequestBuilders.put(UPDATE_STAFF, 1)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header("authorization", adminToken)
+                        .content(requestJson))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.errno").value(0))
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn().getResponse().getContentAsString();
+    }
+
+    @Test
+    public void deleteStaff() throws Exception {
         Mockito.when(redisUtil.hasKey(Mockito.anyString())).thenReturn(false);
         Mockito.when(redisUtil.set(Mockito.anyString(), Mockito.any(), Mockito.anyLong())).thenReturn(true);
         Mockito.when(redisUtil.bfExist(Mockito.anyString(), (Long) Mockito.any())).thenReturn(false);

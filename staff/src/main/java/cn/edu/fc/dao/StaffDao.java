@@ -3,9 +3,7 @@ package cn.edu.fc.dao;
 import cn.edu.fc.dao.bo.Staff;
 import cn.edu.fc.dao.openfeign.StoreDao;
 import cn.edu.fc.javaee.core.exception.BusinessException;
-import cn.edu.fc.javaee.core.model.Constants;
 import cn.edu.fc.javaee.core.model.ReturnNo;
-import cn.edu.fc.javaee.core.model.dto.UserDto;
 import cn.edu.fc.javaee.core.util.RedisUtil;
 import cn.edu.fc.mapper.StaffPoMapper;
 import cn.edu.fc.mapper.po.StaffPo;
@@ -23,8 +21,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static cn.edu.fc.javaee.core.model.Constants.MAX_RETURN;
-import static cn.edu.fc.javaee.core.util.Common.putGmtFields;
-import static cn.edu.fc.javaee.core.util.Common.putUserFields;
 
 @Repository
 @RefreshScope
@@ -123,12 +119,10 @@ public class StaffDao {
         return ret;
     }
 
-    public Long insert(Staff staff, UserDto user) throws RuntimeException {
+    public Long insert(Staff staff) throws RuntimeException {
         StaffPo po = this.staffPoMapper.findByNameAndPhone(staff.getName(), staff.getPhone());
         if (null == po) {
             StaffPo staffPo = getPo(staff);
-            putUserFields(staffPo, "creator", user);
-            putGmtFields(staffPo, "create");
             this.staffPoMapper.save(staffPo);
             return staffPo.getId();
         } else {
@@ -136,13 +130,9 @@ public class StaffDao {
         }
     }
 
-    public String save(Long staffId, Staff staff, UserDto user) {
+    public String save(Long staffId, Staff staff) {
         StaffPo po = getPo(staff);
         po.setId(staffId);
-        if (null != user) {
-            putUserFields(po, "modifier", user);
-            putGmtFields(po, "modified");
-        }
         this.staffPoMapper.save(po);
         return String.format(KEY, staff.getId());
     }

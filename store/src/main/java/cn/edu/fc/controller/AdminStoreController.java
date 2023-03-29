@@ -60,8 +60,8 @@ public class AdminStoreController {
     }
 
     @GetMapping("/name/{storeName}/store")
-    public ReturnObject getStoreByName(@PathVariable String name) {
-        StoreDto ret = this.storeService.findStoreByName(name);
+    public ReturnObject getStoreByName(@PathVariable String storeName) {
+        StoreDto ret = this.storeService.findStoreByName(storeName);
         return new ReturnObject(ReturnNo.OK, ret);
     }
 

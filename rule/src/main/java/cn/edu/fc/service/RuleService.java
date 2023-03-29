@@ -65,14 +65,14 @@ public class RuleService {
         return dto;
     }
 
-    public void updateRule(String type, Long storeId, String value, UserDto user) {
+    public void updateRule(String type, Long storeId, String value) {
         Rule bo = this.ruleDao.findByTypeAndStoreId(type, storeId);
         if (null == bo) {
             Rule rule = Rule.builder().type(type).value(value).storeId(storeId).build();
-            this.ruleDao.insert(rule, user);
+            this.ruleDao.insert(rule);
         } else {
             Rule rule = Rule.builder().type(bo.getType()).value(value).storeId(bo.getStoreId()).build();
-            this.ruleDao.save(bo.getId(), rule, user);
+            this.ruleDao.save(bo.getId(), rule);
         }
     }
 

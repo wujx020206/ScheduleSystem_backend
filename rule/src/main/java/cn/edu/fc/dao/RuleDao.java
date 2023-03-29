@@ -131,12 +131,10 @@ public class RuleDao {
         return getBo(po, Optional.empty());
     }
 
-    public Long insert(Rule rule, UserDto user) throws RuntimeException {
+    public Long insert(Rule rule) throws RuntimeException {
         RulePo po = this.rulePoMapper.findByTypeAndStoreId(rule.getType(), rule.getStoreId());
         if (null == po) {
             RulePo rulePo = getPo(rule);
-            putUserFields(rulePo, "creator", user);
-            putGmtFields(rulePo, "create");
             this.rulePoMapper.save(rulePo);
             return rulePo.getId();
         } else {
@@ -144,13 +142,9 @@ public class RuleDao {
         }
     }
 
-    public String save(Long ruleId, Rule rule, UserDto user) {
+    public String save(Long ruleId, Rule rule) {
         RulePo po = getPo(rule);
         po.setId(ruleId);
-        if (null != user) {
-            putUserFields(po, "modifier", user);
-            putGmtFields(po, "modified");
-        }
         this.rulePoMapper.save(po);
         return String.format(KEY, rule.getId());
     }

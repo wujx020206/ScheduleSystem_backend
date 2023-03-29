@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static cn.edu.fc.javaee.core.model.Constants.MAX_RETURN;
 import static cn.edu.fc.javaee.core.util.Common.putGmtFields;
 import static cn.edu.fc.javaee.core.util.Common.putUserFields;
 
@@ -76,7 +77,7 @@ public class StoreDao {
     }
 
     public List<Store> retrieveAll(Integer page, Integer pageSize) throws RuntimeException {
-        List<StorePo> retList = this.storePoMapper.findAll(PageRequest.of(0, Constants.MAX_RETURN))
+        List<StorePo> retList = this.storePoMapper.findAll(PageRequest.of(0, MAX_RETURN))
                 .stream().collect(Collectors.toList());
         if (retList.size() == 0)
             return new ArrayList<>();

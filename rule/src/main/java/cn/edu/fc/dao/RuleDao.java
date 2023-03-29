@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static cn.edu.fc.javaee.core.model.Constants.MAX_RETURN;
 import static cn.edu.fc.javaee.core.util.Common.putGmtFields;
 import static cn.edu.fc.javaee.core.util.Common.putUserFields;
 
@@ -86,7 +87,7 @@ public class RuleDao {
     }
 
     public List<Rule> retrieveAll(Integer page, Integer pageSize) throws RuntimeException {
-        List<RulePo> retList = this.rulePoMapper.findAll(PageRequest.of(0, Constants.MAX_RETURN))
+        List<RulePo> retList = this.rulePoMapper.findAll(PageRequest.of(0, MAX_RETURN))
                 .stream().collect(Collectors.toList());
         if (null == retList || retList.size() == 0)
             return new ArrayList<>();
@@ -98,7 +99,7 @@ public class RuleDao {
     }
 
     public List<Rule> retrieveByStoreId(Long storeId, Integer page, Integer pageSize) throws RuntimeException {
-        List<RulePo> retList = this.rulePoMapper.findByStoreId(storeId, PageRequest.of(page, pageSize))
+        List<RulePo> retList = this.rulePoMapper.findByStoreId(storeId, PageRequest.of(0, MAX_RETURN))
                 .stream().collect(Collectors.toList());
         if (null == retList || retList.size() == 0)
             return new ArrayList<>();

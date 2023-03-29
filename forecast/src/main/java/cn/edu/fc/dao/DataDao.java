@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static cn.edu.fc.javaee.core.model.Constants.MAX_RETURN;
+
 @Repository
 @RefreshScope
 public class DataDao {
@@ -82,7 +84,7 @@ public class DataDao {
     }
 
     public List<Data> retrieveByStoreId(Long storeId, Integer page, Integer pageSize) {
-        List<DataPo> retList = this.dataPoMapper.findByStoreId(storeId, PageRequest.of(page, pageSize))
+        List<DataPo> retList = this.dataPoMapper.findByStoreId(storeId, PageRequest.of(0, MAX_RETURN))
                 .stream().collect(Collectors.toList());
         if (null == retList || retList.size() == 0)
             return new ArrayList<>();
@@ -106,7 +108,7 @@ public class DataDao {
     }
 
     public List<Data> retrieveByStoreIdAndDate(Long storeId, LocalDate date, Integer page, Integer pageSize) {
-        List<DataPo> retList = this.dataPoMapper.findByStoreIdAndDate(storeId, String.valueOf(date), PageRequest.of(page, pageSize))
+        List<DataPo> retList = this.dataPoMapper.findByStoreIdAndDate(storeId, String.valueOf(date), PageRequest.of(0, MAX_RETURN))
                 .stream().collect(Collectors.toList());
         if (null == retList || retList.size() == 0)
             return new ArrayList<>();

@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static cn.edu.fc.javaee.core.model.Constants.MAX_RETURN;
 import static cn.edu.fc.javaee.core.util.Common.putGmtFields;
 import static cn.edu.fc.javaee.core.util.Common.putUserFields;
 
@@ -64,7 +65,7 @@ public class PreferenceDao {
     }
 
     public List<Preference> retrieveAll(Integer page, Integer pageSize) throws RuntimeException {
-        List<PreferencePo> retList = this.preferencePoMapper.findAll(PageRequest.of(page, pageSize))
+        List<PreferencePo> retList = this.preferencePoMapper.findAll(PageRequest.of(0, MAX_RETURN))
                 .stream().collect(Collectors.toList());
         if (null == retList || retList.size() == 0)
             return new ArrayList<>();
@@ -76,7 +77,7 @@ public class PreferenceDao {
     }
 
     public List<Preference> retrieveByStaffId(Long staffId, Integer page, Integer pageSize) {
-        List<PreferencePo> retList = this.preferencePoMapper.findByStaffId(staffId, PageRequest.of(page, pageSize))
+        List<PreferencePo> retList = this.preferencePoMapper.findByStaffId(staffId, PageRequest.of(0, MAX_RETURN))
                 .stream().collect(Collectors.toList());
         if (null == retList || retList.size() == 0)
             return new ArrayList<>();
@@ -88,7 +89,7 @@ public class PreferenceDao {
     }
 
     public List<Preference> retrieveByType(Byte type, Integer page, Integer pageSize) {
-        List<PreferencePo> retList = this.preferencePoMapper.findByType(type, PageRequest.of(page, pageSize))
+        List<PreferencePo> retList = this.preferencePoMapper.findByType(type, PageRequest.of(0, MAX_RETURN))
                 .stream().collect(Collectors.toList());
         if (null == retList || retList.size() == 0)
             return new ArrayList<>();

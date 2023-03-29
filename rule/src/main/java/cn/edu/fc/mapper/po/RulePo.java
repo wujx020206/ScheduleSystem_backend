@@ -9,7 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "rule_rule")
+@Table(name = "rule")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

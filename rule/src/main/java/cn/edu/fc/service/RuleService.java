@@ -72,8 +72,8 @@ public class RuleService {
             Rule rule = Rule.builder().type(type).value(value).storeId(storeId).build();
             this.ruleDao.insert(rule);
         } else {
-            Rule rule = Rule.builder().id(bo.getId()).type(bo.getType()).value(value).storeId(bo.getStoreId()).build();
-            this.ruleDao.save(bo.getId(), rule);
+            bo.setValue(value);
+            this.ruleDao.save(bo.getId(), bo);
         }
     }
 

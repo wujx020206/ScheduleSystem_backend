@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -78,30 +79,30 @@ public class RuleService {
 
     public AllRulesDto retrieveAllRules(Long storeId) {
         List<Rule> rules = this.ruleDao.retrieveByStoreId(storeId);
-        Long preparePeople = (long)Math.ceil(findRule(rules,"自定义规则_准备工作人数").getStore().getSize()/Long.parseLong(findRule(rules, "自定义规则_准备工作人数").getValue()));
+        Integer preparePeople = (int)Math.ceil(findRule(rules,"自定义规则_准备工作人数").getStore().getSize()/Long.parseLong(findRule(rules, "自定义规则_准备工作人数").getValue()));
         Float workPeople = (float)Math.ceil(findRule(rules,"自定义规则_工作店员需求数").getStore().getSize()/Long.parseLong(findRule(rules, "自定义规则_工作店员需求数").getValue()));
-        Long endPeople = (long)Math.ceil(findRule(rules,"自定义规则_收尾工作人数").getStore().getSize()/Long.parseLong(findRule(rules, "自定义规则_收尾工作人数").getValue().split(" ")[0]))+Long.parseLong(findRule(rules, "自定义规则_收尾工作人数").getValue().split(" ")[1]);
+        Integer endPeople = (int)Math.ceil(findRule(rules,"自定义规则_收尾工作人数").getStore().getSize()/Long.parseLong(findRule(rules, "自定义规则_收尾工作人数").getValue().split(" ")[0]))+Integer.parseInt(findRule(rules, "自定义规则_收尾工作人数").getValue().split(" ")[1]);
 
-        AllRulesDto allRulesDto = AllRulesDto.builder().weekDayOpenRule(Long.valueOf(findRule(rules, "固定规则_工作日开店规则").getValue()))
-                .weekDayCloseRule(Long.valueOf(findRule(rules, "固定规则_工作日关店规则").getValue()))
-                .weekendOpenRule(Long.valueOf(findRule(rules, "固定规则_周末开店规则").getValue()))
-                .weekendCloseRule(Long.valueOf(findRule(rules, "固定规则_周末关店规则").getValue()))
-                .maxHourPerWeek(Long.valueOf(findRule(rules, "固定规则_员工每周工作时长").getValue()))
-                .maxHourPerDay(Long.valueOf(findRule(rules, "固定规则_员工每天工作时长").getValue()))
-                .leastHourPerPeriod(Long.valueOf(findRule(rules, "固定规则_单班次最短时长").getValue()))
-                .maxHourPerPeriod(Long.valueOf(findRule(rules, "固定规则_单班次最长时长").getValue()))
-                .lunchBegin(Long.valueOf(findRule(rules, "固定规则_午餐开始时间").getValue()))
-                .lunchEnd(Long.valueOf(findRule(rules, "固定规则_午餐结束时间").getValue()))
-                .dinnerBegin(Long.valueOf(findRule(rules, "固定规则_晚餐开始时间").getValue()))
-                .dinnerEnd(Long.valueOf(findRule(rules, "固定规则_晚餐结束时间").getValue()))
-                .breakTime(Long.valueOf(findRule(rules, "固定规则_休息时长").getValue()))
-                .prepareTime(Long.valueOf(findRule(rules, "自定义规则_准备工作时长").getValue()))
+        AllRulesDto allRulesDto = AllRulesDto.builder().weekDayOpenRule(Integer.valueOf(findRule(rules, "固定规则_工作日开店规则").getValue()))
+                .weekDayCloseRule(Integer.valueOf(findRule(rules, "固定规则_工作日关店规则").getValue()))
+                .weekendOpenRule(Integer.valueOf(findRule(rules, "固定规则_周末开店规则").getValue()))
+                .weekendCloseRule(Integer.valueOf(findRule(rules, "固定规则_周末关店规则").getValue()))
+                .maxHourPerWeek(Integer.valueOf(findRule(rules, "固定规则_员工每周工作时长").getValue()))
+                .maxHourPerDay(Integer.valueOf(findRule(rules, "固定规则_员工每天工作时长").getValue()))
+                .leastHourPerPeriod(Integer.valueOf(findRule(rules, "固定规则_单班次最短时长").getValue()))
+                .maxHourPerPeriod(Integer.valueOf(findRule(rules, "固定规则_单班次最长时长").getValue()))
+                .lunchBegin(Integer.valueOf(findRule(rules, "固定规则_午餐开始时间").getValue()))
+                .lunchEnd(Integer.valueOf(findRule(rules, "固定规则_午餐结束时间").getValue()))
+                .dinnerBegin(Integer.valueOf(findRule(rules, "固定规则_晚餐开始时间").getValue()))
+                .dinnerEnd(Integer.valueOf(findRule(rules, "固定规则_晚餐结束时间").getValue()))
+                .breakTime(LocalTime.parse(findRule(rules, "固定规则_休息时长").getValue()))
+                .prepareTime(Integer.valueOf(findRule(rules, "自定义规则_准备工作时长").getValue()))
                 .preparePeople(preparePeople)
                 .prepareStation(Arrays.asList(findRule(rules,"自定义规则_准备工作职位").getValue().split(" ")))
                 .workPeople(workPeople)
                 .workStation(Arrays.asList(findRule(rules,"自定义规则_工作职位").getValue().split(" ")))
-                .leastPeople(Long.valueOf(findRule(rules, "自定义规则_无客流量店员数").getValue()))
-                .endHour(Long.valueOf(findRule(rules, "自定义规则_收尾工作时长").getValue()))
+                .leastPeople(Integer.valueOf(findRule(rules, "自定义规则_无客流量店员数").getValue()))
+                .endHour(Integer.valueOf(findRule(rules, "自定义规则_收尾工作时长").getValue()))
                 .endPeople(endPeople)
                 .endStation(Arrays.asList(findRule(rules,"自定义规则_收尾工作职位").getValue().split(" ")))
                 .build();

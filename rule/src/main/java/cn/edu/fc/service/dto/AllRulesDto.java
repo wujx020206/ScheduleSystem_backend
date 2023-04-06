@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Data
@@ -12,28 +13,28 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Builder
 public class AllRulesDto {
-    private Long weekDayOpenRule;
-    private Long weekDayCloseRule;
-    private Long weekendOpenRule;
-    private Long weekendCloseRule;
-    private Long maxHourPerWeek;
-    private Long maxHourPerDay;
-    private Long leastHourPerPeriod;
-    private Long maxHourPerPeriod;
-    private Long maxWorkWeek;
-    private Long lunchBegin;
-    private Long lunchEnd;
-    private Long dinnerBegin;
-    private Long dinnerEnd;
-    private Long breakTime;
-    private Long prepareTime;
-    private Long preparePeople;
+    private Integer weekDayOpenRule;
+    private Integer weekDayCloseRule;
+    private Integer weekendOpenRule;
+    private Integer weekendCloseRule;
+    private Integer maxHourPerWeek;
+    private Integer maxHourPerDay;
+    private Integer leastHourPerPeriod;
+    private Integer maxHourPerPeriod;
+    private Integer maxWorkWeek;
+    private Integer lunchBegin;
+    private Integer lunchEnd;
+    private Integer dinnerBegin;
+    private Integer dinnerEnd;
+    private LocalTime breakTime;
+    private Integer prepareTime;
+    private Integer preparePeople;
     private List<String> prepareStation;
     private Float workPeople;
     private List<String> workStation;
-    private Long leastPeople;
-    private Long endHour;
-    private Long endPeople;
+    private Integer leastPeople;
+    private Integer endHour;
+    private Integer endPeople;
     private List<String> endStation;
 
     public void setEndPeople(Long x, Long y) {

@@ -41,28 +41,28 @@ public class ScheduleService {
         this.scheduler = scheduler;
     }
 
-    public PageDto<StaffSchedule> retrieveScheduleByDay(Long storeId, LocalDate date, UserDto user) {
+    public PageDto<StaffSchedule> retrieveScheduleByDay(Long storeId, LocalDate date) {
         List<StaffSchedule> ret = staffScheduleDao.retrieveByByStartGreaterThanEqualAndEndLessThanEqual(date.atStartOfDay(), date.plusDays(1).atStartOfDay(), 0, MAX_RETURN);
         if (null == ret || ret.isEmpty()) {
             logger.info("No schedule found for day {}, generating...", date);
-            this.generateSchedule(storeId, date, user);
+            this.generateSchedule(storeId, date);
             ret = staffScheduleDao.retrieveByByStartGreaterThanEqualAndEndLessThanEqual(date.atStartOfDay(), date.plusDays(1).atStartOfDay(), 0, MAX_RETURN);
         }
         return new PageDto<>(ret, 0, ret.size());
     }
 
-    public PageDto<StaffSchedule> retrieveScheduleByDayAndSkill(Long storeId, LocalDate date, String skill, UserDto user) {
+    public PageDto<StaffSchedule> retrieveScheduleByDayAndSkill(Long storeId, LocalDate date, String skill) {
         // TODO: implement
-        return this.retrieveScheduleByDay(storeId, date, user);
+        return this.retrieveScheduleByDay(storeId, date);
     }
 
-    public PageDto<StaffSchedule> retrieveScheduleByDayAndPosition(Long storeId, LocalDate date, String position, UserDto user) {
+    public PageDto<StaffSchedule> retrieveScheduleByDayAndPosition(Long storeId, LocalDate date, String position) {
         // TODO: implement
-        return this.retrieveScheduleByDay(storeId, date, user);
+        return this.retrieveScheduleByDay(storeId, date);
     }
 
-    public PageDto<StaffSchedule> retrieveScheduleByDayAndStaff(Long storeId, LocalDate date, Long staffId, UserDto user) {
-        List<StaffSchedule> ret = this.retrieveScheduleByDay(storeId, date, user)
+    public PageDto<StaffSchedule> retrieveScheduleByDayAndStaff(Long storeId, LocalDate date, Long staffId) {
+        List<StaffSchedule> ret = this.retrieveScheduleByDay(storeId, date)
                 .getList()
                 .stream()
                 .filter(schedule -> schedule.getStaffId().equals(staffId))
@@ -70,28 +70,28 @@ public class ScheduleService {
         return new PageDto<>(ret, 0, ret.size());
     }
 
-    public PageDto<StaffSchedule> retrieveScheduleByWeek(Long storeId, LocalDate date, UserDto user) {
+    public PageDto<StaffSchedule> retrieveScheduleByWeek(Long storeId, LocalDate date) {
         List<StaffSchedule> ret = staffScheduleDao.retrieveByByStartGreaterThanEqualAndEndLessThanEqual(date.atStartOfDay(), date.plusDays(7).atStartOfDay(), 0, MAX_RETURN);
         if (null == ret || ret.isEmpty()) {
             logger.info("No schedule found for week begin at {}, generating...", date);
-            this.generateSchedule(storeId, date, user);
+            this.generateSchedule(storeId, date);
             ret = staffScheduleDao.retrieveByByStartGreaterThanEqualAndEndLessThanEqual(date.atStartOfDay(), date.plusDays(7).atStartOfDay(), 0, MAX_RETURN);
         }
         return new PageDto<>(ret, 0, ret.size());
     }
 
-    public PageDto<StaffSchedule> retrieveScheduleByWeekAndSkill(Long storeId, LocalDate date, String skill, UserDto user) {
+    public PageDto<StaffSchedule> retrieveScheduleByWeekAndSkill(Long storeId, LocalDate date, String skill) {
         // TODO: implement
-        return this.retrieveScheduleByWeek(storeId, date, user);
+        return this.retrieveScheduleByWeek(storeId, date);
     }
 
-    public PageDto<StaffSchedule> retrieveScheduleByWeekAndPosition(Long storeId, LocalDate date, String position, UserDto user) {
+    public PageDto<StaffSchedule> retrieveScheduleByWeekAndPosition(Long storeId, LocalDate date, String position) {
         // TODO: implement
-        return this.retrieveScheduleByWeek(storeId, date, user);
+        return this.retrieveScheduleByWeek(storeId, date);
     }
 
-    public PageDto<StaffSchedule> retrieveScheduleByWeekAndStaff(Long storeId, LocalDate date, Long staffId, UserDto user) {
-        List<StaffSchedule> ret = this.retrieveScheduleByWeek(storeId, date, user)
+    public PageDto<StaffSchedule> retrieveScheduleByWeekAndStaff(Long storeId, LocalDate date, Long staffId) {
+        List<StaffSchedule> ret = this.retrieveScheduleByWeek(storeId, date)
                 .getList()
                 .stream()
                 .filter(schedule -> schedule.getStaffId().equals(staffId))
@@ -99,7 +99,7 @@ public class ScheduleService {
         return new PageDto<>(ret, 0, ret.size());
     }
 
-    private void generateSchedule(Long storeId, LocalDate date, UserDto user) {
+    private void generateSchedule(Long storeId, LocalDate date) {
         InternalReturnObject<PageDto<Data>> dataResp = dataDao.retrieveWeekData(storeId, date);
         List<Data> data = this.checkResponse(dataResp).getList();
         InternalReturnObject<PageDto<Staff>> staffResp = staffDao.retrieveAllStaffsByShopId(storeId);
@@ -110,7 +110,7 @@ public class ScheduleService {
         AllRules rules = this.checkResponse(ruleResp);
 
         ScheduleResult result = scheduler.schedule(data, staffs, staffPositions, date, rules);
-        result.stream().forEach(schedule -> staffScheduleDao.insert(schedule, user));
+        result.stream().forEach(schedule -> staffScheduleDao.insert(schedule));
     }
 
     private <T> T checkResponse(InternalReturnObject<T> resp) {

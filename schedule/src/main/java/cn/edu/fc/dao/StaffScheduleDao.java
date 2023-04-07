@@ -63,10 +63,8 @@ public class StaffScheduleDao {
                 .collect(Collectors.toList());
     }
 
-    public Long insert(StaffSchedule staffSchedule, UserDto user) {
+    public Long insert(StaffSchedule staffSchedule) {
         StaffSchedulePo po = this.getPo(staffSchedule);
-        putUserFields(po, "creator", user);
-        putGmtFields(po, "create");
         this.staffSchedulePoMapper.save(po);
         return po.getId();
     }

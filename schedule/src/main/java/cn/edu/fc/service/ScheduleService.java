@@ -42,11 +42,11 @@ public class ScheduleService {
     }
 
     public PageDto<StaffSchedule> retrieveScheduleByDay(Long storeId, LocalDate date) {
-        List<StaffSchedule> ret = staffScheduleDao.retrieveByByStartGreaterThanEqualAndEndLessThanEqual(date.atStartOfDay(), date.plusDays(1).atStartOfDay(), 0, MAX_RETURN);
+        List<StaffSchedule> ret = staffScheduleDao.retrieveByStartGreaterThanEqualAndEndLessThanEqual(date.atStartOfDay(), date.plusDays(1).atStartOfDay(), 0, MAX_RETURN);
         if (null == ret || ret.isEmpty()) {
             logger.info("No schedule found for day {}, generating...", date);
             this.generateSchedule(storeId, date);
-            ret = staffScheduleDao.retrieveByByStartGreaterThanEqualAndEndLessThanEqual(date.atStartOfDay(), date.plusDays(1).atStartOfDay(), 0, MAX_RETURN);
+            ret = staffScheduleDao.retrieveByStartGreaterThanEqualAndEndLessThanEqual(date.atStartOfDay(), date.plusDays(1).atStartOfDay(), 0, MAX_RETURN);
         }
         return new PageDto<>(ret, 0, ret.size());
     }
@@ -71,11 +71,11 @@ public class ScheduleService {
     }
 
     public PageDto<StaffSchedule> retrieveScheduleByWeek(Long storeId, LocalDate date) {
-        List<StaffSchedule> ret = staffScheduleDao.retrieveByByStartGreaterThanEqualAndEndLessThanEqual(date.atStartOfDay(), date.plusDays(7).atStartOfDay(), 0, MAX_RETURN);
+        List<StaffSchedule> ret = staffScheduleDao.retrieveByStartGreaterThanEqualAndEndLessThanEqual(date.atStartOfDay(), date.plusDays(7).atStartOfDay(), 0, MAX_RETURN);
         if (null == ret || ret.isEmpty()) {
             logger.info("No schedule found for week begin at {}, generating...", date);
             this.generateSchedule(storeId, date);
-            ret = staffScheduleDao.retrieveByByStartGreaterThanEqualAndEndLessThanEqual(date.atStartOfDay(), date.plusDays(7).atStartOfDay(), 0, MAX_RETURN);
+            ret = staffScheduleDao.retrieveByStartGreaterThanEqualAndEndLessThanEqual(date.atStartOfDay(), date.plusDays(7).atStartOfDay(), 0, MAX_RETURN);
         }
         return new PageDto<>(ret, 0, ret.size());
     }

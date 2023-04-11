@@ -19,9 +19,6 @@ import java.time.LocalDateTime;
 public class StaffSchedule extends SSObject implements Serializable {
     @Getter
     @Setter
-    private Long Id;
-    @Getter
-    @Setter
     private Long staffId;
     @Setter
     private StaffDao staffDao;
@@ -39,8 +36,7 @@ public class StaffSchedule extends SSObject implements Serializable {
     private int duration;
 
     @Builder
-    public StaffSchedule(Long Id, Long staffId, LocalDateTime start, LocalDateTime end) {
-        this.Id = Id;
+    public StaffSchedule(Long staffId, LocalDateTime start, LocalDateTime end) {
         this.staffId = staffId;
         this.start = start;
         this.end = end;

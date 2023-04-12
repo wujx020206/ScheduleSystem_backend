@@ -22,10 +22,15 @@ public class Staff {
     static final Byte PREFERENCE_WORK_LONG = 2;
 
     private Long id;
+
     private String name;
+
     private String position;
+
     private String phone;
+
     private String email;
+
     private String shopName;
 
     @Setter
@@ -40,7 +45,7 @@ public class Staff {
             return workdayPreference;
         Preference<String> preference = getPreference(PREFERENCE_WORK_DAY);
         try {
-            if (preference.getValue().strip().equals(""))
+            if (preference.getValue() == null || preference.getValue().strip().equals(""))
                 return workdayPreference = new ArrayList<>();
             workdayPreference = Arrays.stream(preference.getValue().split(" ")).map(Integer::parseInt).collect(Collectors.toList());
         } catch (NumberFormatException e) {
@@ -54,7 +59,7 @@ public class Staff {
             return workTimePreference;
         Preference<String> preference = getPreference(PREFERENCE_WORK_TIME);
         try {
-            if (preference.getValue().strip().equals(""))
+            if (preference.getValue() == null || preference.getValue().strip().equals(""))
                 return workTimePreference = Pair.of(0, 24);
             String[] time = preference.getValue().split(" ");
             if (time.length != 2)
@@ -83,7 +88,7 @@ public class Staff {
     private void getWorkLongPreference() {
         Preference<String> preference = getPreference(PREFERENCE_WORK_LONG);
         try {
-            if (preference.getValue().strip().equals("")) {
+            if (preference.getValue() == null || preference.getValue().strip().equals("")) {
                 weekWorkLongPreference = 24 * 7;
                 dayWorkLongPreference = 24;
                 return;

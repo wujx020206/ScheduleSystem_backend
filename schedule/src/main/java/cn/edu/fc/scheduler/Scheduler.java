@@ -75,10 +75,12 @@ public class Scheduler {
         Function<StaffScheduleInternal, Boolean> validate = schedule -> {
             if (schedule.getDayWorkedTime() + emptySchedule.getDuration() > rules.getMaxHourPerDay() * 2)
                 return false;   // 超出本日工作时间上限
-            if (schedule.getDayWorkedTime() + emptySchedule.getDuration() > schedule.getStaff().getWorkLongPreference() * 2)
+            if (schedule.getDayWorkedTime() + emptySchedule.getDuration() > schedule.getStaff().getDayWorkLongPreference() * 2)
                 return false;   // 超出员工偏好工作时间上限
             if (schedule.getWeekWorkedTime() + emptySchedule.getDuration() > rules.getMaxHourPerWeek() * 2)
                 return false;   // 超出本周工作时间上限
+            if (schedule.getWeekWorkedTime() + emptySchedule.getDuration() > schedule.getStaff().getWeekWorkLongPreference() * 2)
+                return false;   // 超出员工偏好本周工作时间上限
             if (schedule.getLastWorkedHourEnd() == null)
                 return true;    // 无上次工作时间
             if (schedule.getStaff().getWorkdayPreference() != null && !schedule.getStaff().getWorkdayPreference().contains(emptySchedule.getStart().getDayOfWeek().getValue()))

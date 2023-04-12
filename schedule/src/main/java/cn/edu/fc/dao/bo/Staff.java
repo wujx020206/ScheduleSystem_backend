@@ -32,7 +32,8 @@ public class Staff {
     private PreferenceDao preferenceDao;
     private List<Integer> workdayPreference;
     private Pair<Integer, Integer> workTimePreference;
-    private Integer workLongPreference;
+    private Integer dayWorkLongPreference;
+    private Integer weekWorkLongPreference;
 
     public List<Integer> getWorkdayPreference() {
         if (workdayPreference != null)
@@ -65,18 +66,36 @@ public class Staff {
         return workTimePreference;
     }
 
-    public Integer getWorkLongPreference() {
-        if (workLongPreference != null)
-            return workLongPreference;
+    public Integer getDayWorkLongPreference() {
+        if (dayWorkLongPreference != null)
+            return dayWorkLongPreference;
+        this.getWorkLongPreference();
+        return dayWorkLongPreference;
+    }
+
+    public Integer getWeekWorkLongPreference() {
+        if (weekWorkLongPreference != null)
+            return weekWorkLongPreference;
+        this.getWorkLongPreference();
+        return weekWorkLongPreference;
+    }
+
+    private void getWorkLongPreference() {
         Preference<String> preference = getPreference(PREFERENCE_WORK_LONG);
         try {
-            if (preference.getValue().strip().equals(""))
-                return workLongPreference = 24;
-            workLongPreference = Integer.parseInt(preference.getValue());
-        } catch (NumberFormatException e) {
+            if (preference.getValue().strip().equals("")) {
+                weekWorkLongPreference = 24 * 7;
+                dayWorkLongPreference = 24;
+                return;
+            }
+            String[] time = preference.getValue().split(" ");
+            if (time.length != 2)
+                throw new BusinessException(ReturnNo.FIELD_NOTVALID, String.format(ReturnNo.FIELD_NOTVALID.getMessage(), "班次时长偏好"));
+            dayWorkLongPreference = Integer.parseInt(time[0]);
+            weekWorkLongPreference = Integer.parseInt(time[1]);
+        } catch (NumberFormatException | BusinessException e) {
             throw new BusinessException(ReturnNo.FIELD_NOTVALID, String.format(ReturnNo.FIELD_NOTVALID.getMessage(), "班次时长偏好"));
         }
-        return workLongPreference;
     }
 
     private Preference<String> getPreference(Byte type) {

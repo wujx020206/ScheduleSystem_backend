@@ -37,7 +37,7 @@ public class Staff {
     public List<Integer> getWorkdayPreference() {
         if (workdayPreference != null)
             return workdayPreference;
-        Preference<String> preference = getPreference();
+        Preference<String> preference = getPreference(PREFERENCE_WORK_DAY);
         try {
             if (preference.getValue().strip().equals(""))
                 return new ArrayList<>();
@@ -51,7 +51,7 @@ public class Staff {
     public Pair<Integer, Integer> getWorkTimePreference() {
         if (workTimePreference != null)
             return workTimePreference;
-        Preference<String> preference = getPreference();
+        Preference<String> preference = getPreference(PREFERENCE_WORK_TIME);
         try {
             if (preference.getValue().strip().equals(""))
                 return Pair.of(0, 24);
@@ -68,7 +68,7 @@ public class Staff {
     public Integer getWorkLongPreference() {
         if (workLongPreference != null)
             return workLongPreference;
-        Preference<String> preference = getPreference();
+        Preference<String> preference = getPreference(PREFERENCE_WORK_LONG);
         try {
             if (preference.getValue().strip().equals(""))
                 return 24;
@@ -79,10 +79,10 @@ public class Staff {
         return workLongPreference;
     }
 
-    private Preference<String> getPreference() {
+    private Preference<String> getPreference(Byte type) {
         if (preferenceDao == null)
             throw new BusinessException(ReturnNo.PARAMETER_MISSED, ReturnNo.PARAMETER_MISSED.getMessage());
-        InternalReturnObject<Preference<String>> preference = preferenceDao.getPreferenceByStaffIdAndType(id, PREFERENCE_WORK_DAY);
+        InternalReturnObject<Preference<String>> preference = preferenceDao.getPreferenceByStaffIdAndType(id, type);
         if (preference.getErrno() != ReturnNo.OK.getErrNo())
             throw new BusinessException(ReturnNo.getByCode(preference.getErrno()), preference.getErrmsg());
         return preference.getData();

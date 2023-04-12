@@ -123,6 +123,12 @@ public class Scheduler {
             for (int i = begin.get(); i <= end; ++i)
                 needStaffs.set(i, needStaffs.get(i) - 1);
         }
+        scheduleResult.stream().forEach(schedule -> {
+            if (schedule.getDuration() >= rules.getLeastHourPerPeriod() * 2)
+                return;
+            schedule.setDuration(rules.getLeastHourPerPeriod() * 2);
+            schedule.setStart(schedule.getEnd().minusHours(rules.getLeastHourPerPeriod()));
+        });
         return scheduleResult;
     }
     private Optional<Integer> getLastNeedStaff(List<Integer> needStaffs, Function<Integer, Boolean> validate) {

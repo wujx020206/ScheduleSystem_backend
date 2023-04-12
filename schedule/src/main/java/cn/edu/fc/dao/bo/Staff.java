@@ -40,7 +40,7 @@ public class Staff {
         Preference<String> preference = getPreference(PREFERENCE_WORK_DAY);
         try {
             if (preference.getValue().strip().equals(""))
-                return new ArrayList<>();
+                return workdayPreference = new ArrayList<>();
             workdayPreference = Arrays.stream(preference.getValue().split(" ")).map(Integer::parseInt).collect(Collectors.toList());
         } catch (NumberFormatException e) {
             throw new BusinessException(ReturnNo.FIELD_NOTVALID, String.format(ReturnNo.FIELD_NOTVALID.getMessage(), "工作日偏好"));
@@ -54,7 +54,7 @@ public class Staff {
         Preference<String> preference = getPreference(PREFERENCE_WORK_TIME);
         try {
             if (preference.getValue().strip().equals(""))
-                return Pair.of(0, 24);
+                return workTimePreference = Pair.of(0, 24);
             String[] time = preference.getValue().split(" ");
             if (time.length != 2)
                 throw new BusinessException(ReturnNo.FIELD_NOTVALID, String.format(ReturnNo.FIELD_NOTVALID.getMessage(), "工作时间偏好"));
@@ -71,7 +71,7 @@ public class Staff {
         Preference<String> preference = getPreference(PREFERENCE_WORK_LONG);
         try {
             if (preference.getValue().strip().equals(""))
-                return 24;
+                return workLongPreference = 24;
             workLongPreference = Integer.parseInt(preference.getValue());
         } catch (NumberFormatException e) {
             throw new BusinessException(ReturnNo.FIELD_NOTVALID, String.format(ReturnNo.FIELD_NOTVALID.getMessage(), "班次时长偏好"));

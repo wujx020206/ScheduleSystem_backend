@@ -1,5 +1,6 @@
 package cn.edu.fc.dao.bo;
 
+import cn.edu.fc.dao.openfeign.PreferenceDao;
 import cn.edu.fc.dao.openfeign.StaffDao;
 import cn.edu.fc.javaee.core.exception.BusinessException;
 import cn.edu.fc.javaee.core.model.InternalReturnObject;
@@ -50,6 +51,9 @@ public class StaffSchedule extends SSObject implements Serializable {
         this.staff = null;
     }
 
+    @Setter
+    private PreferenceDao preferenceDao;
+
     public Staff getStaff() {
         if (staff != null)
             return staff;
@@ -59,6 +63,7 @@ public class StaffSchedule extends SSObject implements Serializable {
         if (response.getErrno() != ReturnNo.OK.getErrNo())
             throw new BusinessException(ReturnNo.getByCode(response.getErrno()), response.getErrmsg());
         staff = response.getData();
+        staff.setPreferenceDao(preferenceDao);
         return staff;
     }
 }

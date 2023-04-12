@@ -1,6 +1,7 @@
 package cn.edu.fc.dao;
 
 import cn.edu.fc.dao.bo.StaffSchedule;
+import cn.edu.fc.dao.openfeign.PreferenceDao;
 import cn.edu.fc.dao.openfeign.StaffDao;
 import cn.edu.fc.javaee.core.model.dto.UserDto;
 import cn.edu.fc.javaee.core.util.RedisUtil;
@@ -34,12 +35,14 @@ public class StaffScheduleDao {
     private StaffSchedulePoMapper staffSchedulePoMapper;
     private RedisUtil redisUtil;
     private StaffDao staffDao;
+    private PreferenceDao preferenceDao;
 
     @Autowired
-    public StaffScheduleDao(StaffSchedulePoMapper staffSchedulePoMapper, RedisUtil redisUtil, StaffDao staffDao) {
+    public StaffScheduleDao(StaffSchedulePoMapper staffSchedulePoMapper, RedisUtil redisUtil, StaffDao staffDao, PreferenceDao preferenceDao) {
         this.staffSchedulePoMapper = staffSchedulePoMapper;
         this.redisUtil = redisUtil;
         this.staffDao = staffDao;
+        this.preferenceDao = preferenceDao;
     }
 
     private StaffSchedule getBo(StaffSchedulePo po, Optional<String> redisKey) {
@@ -51,6 +54,7 @@ public class StaffScheduleDao {
 
     private void setBo(StaffSchedule bo) {
         bo.setStaffDao(staffDao);
+        bo.setPreferenceDao(preferenceDao);
     }
 
     private StaffSchedulePo getPo(StaffSchedule bo) {

@@ -1,11 +1,13 @@
 package cn.edu.fc.scheduler;
 
 import cn.edu.fc.dao.bo.*;
+import cn.edu.fc.dao.openfeign.PreferenceDao;
 import cn.edu.fc.dao.openfeign.StaffDao;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -23,11 +25,14 @@ public class Scheduler {
         PREPARE, WORK, END
     }
 
-    @Autowired
-    private StaffDao staffDao;
+    private final StaffDao staffDao;
+    private final PreferenceDao preferenceDao;
 
-    public Scheduler() {
+    @Autowired
+    public Scheduler(StaffDao staffDao, PreferenceDao preferenceDao) {
         random = new Random();
+        this.staffDao = staffDao;
+        this.preferenceDao = preferenceDao;
     }
 
     public ScheduleResult schedule(List<Data> data, List<Staff> staffs, List<String> staffPositions, LocalDate beginDate, AllRules rules) {
@@ -55,6 +60,7 @@ public class Scheduler {
             schedule.setStaff(staff.getStaff());
             schedule.setStaffId(staff.getStaff().getId());
             schedule.setStaffDao(staffDao);
+            schedule.setPreferenceDao(preferenceDao);
             if (staff.getLastWorkedHourStart() == null || schedule.getStart().getDayOfMonth() != staff.getLastWorkedHourStart().getDayOfMonth())
                 staff.setDayWorkedTime(0);
             staff.setDayWorkedTime(staff.getDayWorkedTime() + schedule.getDuration());
@@ -68,15 +74,22 @@ public class Scheduler {
     private StaffScheduleInternal getStaffWithWorkTimeType(HashMap<String, Queue<StaffScheduleInternal>> allStaffs, WorkTimeType type, StaffSchedule emptySchedule, AllRules rules) {
         Function<StaffScheduleInternal, Boolean> validate = schedule -> {
             if (schedule.getDayWorkedTime() + emptySchedule.getDuration() > rules.getMaxHourPerDay() * 2)
-                return false;
+                return false;   // 超出本日工作时间上限
+            if (schedule.getDayWorkedTime() + emptySchedule.getDuration() > schedule.getStaff().getWorkLongPreference() * 2)
+                return false;   // 超出员工偏好工作时间上限
             if (schedule.getWeekWorkedTime() + emptySchedule.getDuration() > rules.getMaxHourPerWeek() * 2)
-                return false;
+                return false;   // 超出本周工作时间上限
             if (schedule.getLastWorkedHourEnd() == null)
-                return true;
+                return true;    // 无上次工作时间
+            if (schedule.getStaff().getWorkdayPreference() != null && !schedule.getStaff().getWorkdayPreference().contains(emptySchedule.getStart().getDayOfWeek().getValue()))
+                return false;   // 不符合员工偏好工作日
+            Pair<Integer, Integer> workTimePreference = schedule.getStaff().getWorkTimePreference();
+            if (workTimePreference != null && emptySchedule.getStart().getHour() < workTimePreference.getFirst() || workTimePreference.getSecond() < emptySchedule.getEnd().getHour())
+                return false;   // 不符合员工偏好工作时间
             return schedule.getLastWorkedHourEnd()
                     .plusHours(rules.getBreakTime().getHour())
                     .plusMinutes(rules.getBreakTime().getMinute())
-                    .isAfter(emptySchedule.getStart());
+                    .isBefore(emptySchedule.getStart());    // TODO: after of before?
         };
         if (type == WorkTimeType.PREPARE)
             return this.getStaffWithPositions(rules.getPrepareStation(), allStaffs, validate);

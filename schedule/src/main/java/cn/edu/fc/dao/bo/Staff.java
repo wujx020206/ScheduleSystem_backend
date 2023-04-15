@@ -4,9 +4,11 @@ import cn.edu.fc.dao.openfeign.PreferenceDao;
 import cn.edu.fc.javaee.core.exception.BusinessException;
 import cn.edu.fc.javaee.core.model.InternalReturnObject;
 import cn.edu.fc.javaee.core.model.ReturnNo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.util.Pair;
 
 import java.util.ArrayList;
@@ -33,9 +35,14 @@ public class Staff {
 
     private String shopName;
 
+    @ToString.Exclude
+    @JsonIgnore
     @Setter
     private PreferenceDao preferenceDao;
     private List<Integer> workdayPreference;
+    @ToString.Exclude
+    @JsonIgnore
+    @Setter
     private Pair<Integer, Integer> workTimePreference;
     private Integer dayWorkLongPreference;
     private Integer weekWorkLongPreference;

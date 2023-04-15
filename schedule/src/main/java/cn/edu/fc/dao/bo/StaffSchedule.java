@@ -6,6 +6,7 @@ import cn.edu.fc.javaee.core.exception.BusinessException;
 import cn.edu.fc.javaee.core.model.InternalReturnObject;
 import cn.edu.fc.javaee.core.model.ReturnNo;
 import cn.edu.fc.javaee.core.model.bo.SSObject;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -21,6 +22,8 @@ public class StaffSchedule extends SSObject implements Serializable {
     @Getter
     @Setter
     private Long staffId;
+    @ToString.Exclude
+    @JsonIgnore
     @Setter
     private StaffDao staffDao;
     @Setter

@@ -12,6 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -81,5 +82,21 @@ public class AdminScheduleController {
                                                   @PathVariable Long staffId) {
         return new ReturnObject(ReturnNo.OK, scheduleService.retrieveScheduleByWeekAndStaff(storeId, date, staffId));
     }
-    //        LocalTime localTime = LocalTime.parse(date, DateTimeFormatter.ofPattern("HH:mm:ss"));
+
+    @PutMapping("/{id}/{name}/period")
+    public ReturnObject updateStoreRuleByType(@PathVariable Long storeId,
+                                              @PathVariable Long id,
+                                              @PathVariable String name) {
+        this.scheduleService.updateStaffSchedule(storeId, id, name);
+        return new ReturnObject(ReturnNo.OK);
+    }
+
+    @GetMapping("/id/{staffId}/{start}/{end}/period")
+    public ReturnObject getIdByStaffIdAndStartAndEnd(@PathVariable Long staffId,
+                                                     @PathVariable String start,
+                                                     @PathVariable String end) {
+        LocalDateTime startTime = LocalDateTime.parse(start, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        LocalDateTime endTime = LocalDateTime.parse(end, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return new ReturnObject(ReturnNo.OK, scheduleService.findIdByStaffIdAndStartAndEnd(staffId, startTime, endTime));
+    }
 }

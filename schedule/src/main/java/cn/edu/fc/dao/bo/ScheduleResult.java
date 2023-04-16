@@ -4,6 +4,7 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -15,7 +16,7 @@ public class ScheduleResult {
         scheduleList = new ArrayList<>();
     }
     public ScheduleResult insertEmpty(LocalDateTime start, LocalDateTime end, int duration) {
-        scheduleList.add(new StaffSchedule(start, end, duration));
+        scheduleList.add(new StaffSchedule(null, start, end, duration));
         return this;
     }
     public Stream<StaffSchedule> stream() {
@@ -24,5 +25,9 @@ public class ScheduleResult {
     public ScheduleResult merge(ScheduleResult other) {
         this.scheduleList.addAll(other.scheduleList);
         return this;
+    }
+
+    public void sort() {
+        this.scheduleList.sort(Comparator.comparing(StaffSchedule::getStart));
     }
 }

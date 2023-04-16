@@ -40,20 +40,16 @@ public class StaffSchedule extends SSObject implements Serializable {
     private int duration;
 
     @Builder
-    public StaffSchedule(Long staffId, LocalDateTime start, LocalDateTime end) {
+    public StaffSchedule(Long staffId, LocalDateTime start, LocalDateTime end, int duration) {
         this.staffId = staffId;
         this.start = start;
         this.end = end;
         this.staff = null;
-    }
-
-    public StaffSchedule(LocalDateTime start, LocalDateTime end, int duration) {
-        this.start = start;
-        this.end = end;
         this.duration = duration;
-        this.staff = null;
     }
 
+    @ToString.Exclude
+    @JsonIgnore
     @Setter
     private PreferenceDao preferenceDao;
 

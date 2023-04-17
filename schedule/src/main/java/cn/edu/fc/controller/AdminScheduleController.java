@@ -99,4 +99,11 @@ public class AdminScheduleController {
         LocalDateTime endTime = LocalDateTime.parse(end, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         return new ReturnObject(ReturnNo.OK, scheduleService.findIdByStaffIdAndStartAndEnd(staffId, startTime, endTime));
     }
+
+    @PutMapping("/{id}/id")
+    public ReturnObject deleteById(@PathVariable Long storeId,
+                                   @PathVariable Long id) {
+        this.scheduleService.deleteById(id);
+        return new ReturnObject(ReturnNo.OK);
+    }
 }

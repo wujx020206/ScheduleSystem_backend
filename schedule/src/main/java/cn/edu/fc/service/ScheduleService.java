@@ -138,6 +138,16 @@ public class ScheduleService {
         }
     }
 
+    public void deleteById(Long id) {
+        StaffSchedule bo = this.staffScheduleDao.findById(id);
+        if (null != bo) {
+            throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, String.format(ReturnNo.RESOURCE_ID_NOTEXIST.getMessage(), "排版安排", id));
+        }
+
+        StaffSchedule newBo = StaffSchedule.builder().staffId(null).start(bo.getStart()).end(bo.getEnd()).duration(bo.getDuration()).build();
+        this.staffScheduleDao.save(id, newBo);
+    }
+
     public Long findIdByStaffIdAndStartAndEnd(Long staffId, LocalDateTime start, LocalDateTime end) {
         Long ret = this.staffScheduleDao.findIdByStaffIdAndStartAndEnd(staffId, start, end);
         return ret;

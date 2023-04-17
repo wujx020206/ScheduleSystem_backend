@@ -1,4 +1,3 @@
-//School of Informatics Xiamen University, GPL-3.0 license
 package cn.edu.fc.javaee.core.util;
 
 import cn.edu.fc.javaee.core.exception.BusinessException;
@@ -21,8 +20,6 @@ import java.util.stream.Collectors;
 
 /**
  * 通用工具类
- *
- * @author Ming Qiu
  **/
 public class Common {
     private static Logger logger = LoggerFactory.getLogger(Common.class);

@@ -1,4 +1,3 @@
-//School of Informatics Xiamen University, GPL-3.0 license
 package cn.edu.fc.javaee.core.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -8,9 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-/**
- * 简单用户西悉尼
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

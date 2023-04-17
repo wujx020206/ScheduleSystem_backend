@@ -17,11 +17,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
-/**
- * 重写save方法
- * @param <T>
- * @param <ID>
- */
 public class SelectiveUpdateJpaRepositoryImpl<T, ID> extends SimpleJpaRepository<T, ID> {
 
     private final JpaEntityInformation<T, ?> entityInformation;

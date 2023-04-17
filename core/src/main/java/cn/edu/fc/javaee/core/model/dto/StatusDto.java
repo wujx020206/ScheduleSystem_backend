@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * 状态DTO
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

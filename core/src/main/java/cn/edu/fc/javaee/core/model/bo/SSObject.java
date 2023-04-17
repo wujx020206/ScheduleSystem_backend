@@ -1,5 +1,3 @@
-//School of Informatics Xiamen University, GPL-3.0 license
-
 package cn.edu.fc.javaee.core.model.bo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -9,9 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-/**
- * ScheduleSystem的通用对象
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

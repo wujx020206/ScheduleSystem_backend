@@ -1,4 +1,3 @@
-//School of Informatics Xiamen University, GPL-3.0 license
 package cn.edu.fc.javaee.core.model;
 
 import java.util.HashMap;
@@ -6,7 +5,6 @@ import java.util.Map;
 
 /**
  * 返回的错误码
- * @author Ming Qiu
  */
 public enum ReturnNo {
     /***************************************************

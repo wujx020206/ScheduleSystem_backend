@@ -1,4 +1,3 @@
-//School of Informatics Xiamen University, GPL-3.0 license
 package cn.edu.fc.javaee.core.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -8,7 +7,6 @@ import lombok.Getter;
 
 /**
  * 返回对象
- * @author Ming Qiu
  **/
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)

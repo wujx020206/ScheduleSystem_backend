@@ -1,4 +1,3 @@
-//School of Informatics Xiamen University, GPL-3.0 license
 package cn.edu.fc.javaee.core.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -8,10 +7,6 @@ import lombok.ToString;
 
 import java.util.List;
 
-/**
- * 分页对象
- * @author Ming Qiu
- **/
 @Getter
 @ToString
 @AllArgsConstructor

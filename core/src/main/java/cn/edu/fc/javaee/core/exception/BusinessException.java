@@ -1,4 +1,3 @@
-//School of Informatics Xiamen University, GPL-3.0 license
 package cn.edu.fc.javaee.core.exception;
 
 import cn.edu.fc.javaee.core.model.ReturnNo;

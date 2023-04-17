@@ -1,4 +1,3 @@
-//School of Informatics Xiamen University, GPL-3.0 license
 package cn.edu.fc.javaee.core.util;
 
 import cn.edu.fc.javaee.core.model.UserToken;
@@ -16,10 +15,6 @@ import java.util.*;
 
 /**
  * JWT工具
- * @author Ming Qiu
- * @date created in 2019/11/11
- *      modifiedBy Ming Qiu
- *         增加departId 到createToken
  */
 public class JwtHelper {
 

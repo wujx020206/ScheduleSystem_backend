@@ -1,7 +1,3 @@
-create database schedulesystem;
-
-use schedulesystem;
-
 create table store
 (
 `id` bigint NOT NULL AUTO_INCREMENT,
@@ -9,11 +5,14 @@ create table store
 `address` varchar(150) NOT NULL,
 `size` float NOT NULL,
 PRIMARY KEY(`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=11168 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
+LOCK TABLES `store` WRITE;
 insert into store values(1,'门店1','福建省厦门市翔安区',123.3);
 insert into store values(2,'门店2','福建省厦门市思明区',88.7);
 insert into store values(3,'门店3','江苏省南京市江宁区',56.3);
+UNLOCK TABLES;
 
 create table staff
 (
@@ -24,8 +23,9 @@ create table staff
 `email` varchar(30),
 `store_id` bigint,
 PRIMARY KEY(`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=11168 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+LOCK TABLES `staff` WRITE;
 insert into staff values(1,'张三','门店经理','13511111111','zs@mail.com',1);
 insert into staff values(2,'李四','副经理','11111111111','ls@mail.com',1);
 insert into staff values(3,'王五','副经理','22222222222','ww@mail.com',1);
@@ -90,7 +90,7 @@ insert into staff values(61,'许馗','店员（导购）','88818888812','xk@mail
 insert into staff values(62,'宋亭','店员（库房）','88828888813','st@mail.com',3);
 insert into staff values(63,'卢马','店员（库房）','88838888814','lm@mail.com',3);
 insert into staff values(64,'欧阳','店员（库房）','88848888815','oy@mail.com',3);
-
+UNLOCK TABLES;
 
 create table preference
 (
@@ -100,8 +100,9 @@ create table preference
 `value` varchar(20),
 PRIMARY KEY(`id`),
 FOREIGN KEY (`staff_id`) REFERENCES staff(`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=11168 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+LOCK TABLES `preference` WRITE;
 insert into preference values(1,0,1,"3 4 5 6");
 insert into preference values(2,1,1,"8 18");
 insert into preference values(3,2,1,"4 20");
@@ -294,6 +295,7 @@ insert into preference values(189,2,63,"6 30");
 insert into preference values(190,0,64,"1 3 4 5 6 7");
 insert into preference values(191,1,64,"8 20");
 insert into preference values(192,2,64,"6 40");
+UNLOCK TABLES;
 
 create table data
 (
@@ -304,8 +306,9 @@ create table data
 `end_time` time NOT NULL,
 `num` float NOT NULL,
 PRIMARY KEY(`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=11168 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+LOCK TABLES `data` WRITE;
 insert into data values(1,1,'2023-03-27','09:00:00','09:30:00',0);
 insert into data values(2,1,'2023-03-27','09:30:00','10:00:00',0.1);  
 insert into data values(3,1,'2023-03-27','10:00:00','10:30:00',1.3);  
@@ -2823,7 +2826,7 @@ insert into data values(2514,3,'2023-04-30','19:00:00','19:30:00',5.6);
 insert into data values(2515,3,'2023-04-30','19:30:00','20:00:00',2.5);
 insert into data values(2516,3,'2023-04-30','20:00:00','20:30:00',2.1);
 insert into data values(2517,3,'2023-04-30','20:30:00','21:00:00',0.1);
-
+UNLOCK TABLES;
 
 
 create table rule
@@ -2833,8 +2836,9 @@ create table rule
 `store_id` bigint NOT NULL,
 `value` varchar(120),
 PRIMARY KEY(`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=11168 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+LOCK TABLES `rule` WRITE;
 insert into rule values(1,"固定规则_工作日开店规则",1,"9");
 insert into rule values(2,"固定规则_工作日关店规则",1,"21");
 insert into rule values(3,"固定规则_周末开店规则",1,"10");
@@ -2904,6 +2908,7 @@ insert into rule values(66,"自定义规则_无客流量店员数",3,"1");
 insert into rule values(67,"自定义规则_收尾工作时长",3,"1");
 insert into rule values(68,"自定义规则_收尾工作人数",3,"50 0");
 insert into rule values(69,"自定义规则_收尾工作职位",3,"副经理 小组长 店员（收银） 店员（库房） 店员（导购）");
+UNLOCK TABLES;
 
 create table schedule
 (
@@ -2912,4 +2917,4 @@ create table schedule
 `start` datetime NOT NULL,
 `end` datetime NOT NULL,
 PRIMARY KEY(`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=11168 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

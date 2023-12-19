@@ -24,7 +24,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: compile
-        run: mvn compile
+        run: mvn -B package --file pom.xml -Dmaven.test.skip=true
       - name: make a release draft
         uses: softprops/action-gh-release@v1
         env:

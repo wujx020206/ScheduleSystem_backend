@@ -25,16 +25,22 @@ jobs:
             ${{ runner.os }}-maven-
       - name: compile
         run: mvn -B package --file pom.xml -Dmaven.test.skip=true
+      - name: zip artifacts
+        run: |
+          mkdir -p artifacts
+          cp core/target/core-*.jar artifacts/core.jar
+          cp staff/target/staff-*.jar artifacts/staff.jar
+          cp rule/target/rule-*.jar artifacts/rule.jar
+          cp store/target/store-*.jar artifacts/store.jar
+          cp forecast/target/forecast-*.jar artifacts/forecast.jar
+          cp schedule/target/schedule-*.jar artifacts/schedule.jar
+          zip -r schedulesystem.zip artifacts
       - name: make a release draft
         uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          tag_name: ${{ github.ref }}
+          name: Release ${{ github.ref }}
           files: |
-            core/target/core-*.jar
-            staff/target/staff-*.jar
-            rule/target/rule-*.jar
-            store/target/store-*.jar
-            forecast/target/forecast-*.jar
-            schedule/target/schedule-*.jar
+            schedulesystem.zip
           draft: true
+          token: ${{ secrets.GITHUB_TOKEN }}

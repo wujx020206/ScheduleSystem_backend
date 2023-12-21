@@ -31,5 +31,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
-            target/*.jar
+            schedulesystem/target/schedulesystem-*.jar
+            core/target/core-*.jar
+            staff/target/staff-*.jar
+            rule/target/rule-*.jar
+            store/target/store-*.jar
+            forecast/target/forecast-*.jar
+            schedule/target/schedule-*.jar
           draft: true

@@ -28,12 +28,12 @@ jobs:
       - name: zip artifacts
         run: |
           mkdir -p artifacts
-          cp core/target/core-*.jar artifacts/core.jar
-          cp staff/target/staff-*.jar artifacts/staff.jar
-          cp rule/target/rule-*.jar artifacts/rule.jar
-          cp store/target/store-*.jar artifacts/store.jar
-          cp forecast/target/forecast-*.jar artifacts/forecast.jar
-          cp schedule/target/schedule-*.jar artifacts/schedule.jar
+          cp core/target/core-*.jar artifacts
+          cp staff/target/staff-*.jar artifacts
+          cp rule/target/rule-*.jar artifacts
+          cp store/target/store-*.jar artifacts
+          cp forecast/target/forecast-*.jar artifacts
+          cp schedule/target/schedule-*.jar artifacts
           zip -r schedulesystem.zip artifacts
       - name: make a release draft
         uses: softprops/action-gh-release@v1

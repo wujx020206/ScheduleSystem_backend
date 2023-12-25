@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    nacos:
+      config:
+        server-addr: nacos:8848
+        file-extension: yaml
+    inetutils:
+      ignored-interfaces: eth.*

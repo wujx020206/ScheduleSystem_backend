@@ -1,0 +1,59 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - HEAD
+              - OPTIONS
+      routes:
+        - id: forecast
+          uri: lb://forecast-service
+          predicates:
+            - Path=/forecast/**
+          filters:
+            - StripPrefix=1
+
+        - id: rule
+          uri: lb://rule-service
+          predicates:
+            - Path=/rule/**
+          filters:
+            - StripPrefix=1
+
+        - id: schedule
+          uri: lb://schedule-service
+          predicates:
+            - Path=/schedule/**
+          filters:
+            - StripPrefix=1
+
+        - id: staff
+          uri: lb://staff-service
+          predicates:
+            - Path=/staff/**
+          filters:
+            - StripPrefix=1
+
+        - id: store
+          uri: lb://store-service
+          predicates:
+            - Path=/store/**
+          filters:
+            - StripPrefix=1
+management:
+  endpoint:
+    gateway:
+      enabled: true

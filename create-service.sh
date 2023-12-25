@@ -1,0 +1,8 @@
+#!/bin/bash
+docker service create --name gateway  --network my-net --constraint node.labels.server==gateway  --publish published=8080,target=8080 --mount type=bind,source=/root/logs,destination=/app/logs -d schedule-system/gateway:0.0.1-SNAPSHOT
+docker service create --name forecast  --network my-net --constraint node.labels.server==forecast --mount type=bind,source=/root/logs,destination=/app/logs -d schedule-system/forecast:0.0.1-SNAPSHOT
+docker service create --name rule  --network my-net --constraint node.labels.server==rule --mount type=bind,source=/root/logs,destination=/app/logs -d schedule-system/rule:0.0.1-SNAPSHOT
+docker service create --name schedule  --network my-net --constraint node.labels.server==schedule --mount type=bind,source=/root/logs,destination=/app/logs -d schedule-system/schedule:0.0.1-SNAPSHOT
+docker service create --name staff  --network my-net --constraint node.labels.server==staff --mount type=bind,source=/root/logs,destination=/app/logs -d schedule-system/staff:0.0.1-SNAPSHOT
+docker service create --name store  --network my-net --constraint node.labels.server==store --mount type=bind,source=/root/logs,destination=/app/logs -d schedule-system/store:0.0.1-SNAPSHOT
+docker service create --name nginx --network my-net --constraint node.labels.server==nginx --mount type=bind,source=/root/AutoTest/nginx/conf.d,destination=/etc/nginx/conf.d --mount type=bind,source=/root/AutoTest/nginx/pass,destination=/etc/nginx/pass --mount type=bind,source=/root/public-test,destination=/public-test  --mount type=bind,source=/root/AutoTest/nginx/www/html,destination=/var/www/html --mount type=bind,source=/root/logs,destination=/var/log/nginx  -p 80:80 -d nginx:latest

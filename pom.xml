@@ -36,6 +36,7 @@
         <module>store</module>
         <module>forecast</module>
         <module>schedule</module>
+        <module>gateway</module>
     </modules>
 
     <dependencyManagement>
